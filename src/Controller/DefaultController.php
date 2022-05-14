@@ -7,6 +7,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 class DefaultController extends AbstractController
 {
        /**
@@ -34,29 +37,33 @@ class DefaultController extends AbstractController
     }
 
 
-     /**
-     * @Route("/search", name="search")
-     */
-    public function searchAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $requestString = $request->get('q');
-        $posts =  $em->getRepository('AppBundle:Post')->findEntitiesByString($requestString);
-        if(!$posts) {
-            $result['posts']['error'] = "Post Not found :( ";
-        } else {
-            $result['posts'] = $this->getRealEntities($posts);
-        }
-        return new Response(json_encode($result));
+   /**
+ * @Route("/searchU", name="searchU")
+ */
+public function searchAction(Request $request)
+{
+    $em = $this->getDoctrine()->getManager();
+    $requestString = $request->get('q');
+    $posts =  $em->getRepository(User::class)->findEntitiesByString($requestString);
+    if(!$posts) {
+        $result['posts']['error'] = "coach Not found  ";
+    } else {
+        $result['posts'] = $this->getRealEntities($posts);
     }
+    return new Response(json_encode($result));
+}
 
+/**
+ * @Route("/getRealEntities", name="getRealEntities")
+ */
+public function getRealEntities($posts){
+    foreach ($posts as $posts){
+        $realEntities[$posts->getId()] = [$posts-> getNom(),$posts->getPrenom()];
 
-    
-    public function getRealEntities($posts){
-        foreach ($posts as $posts){
-            $realEntities[$posts->getId()] = [$posts->getNom(),$posts->getPrenom()];
-
-        }
-        return $realEntities;
     }
+    return $realEntities;
+}
+
+
+
 }

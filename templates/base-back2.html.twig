@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}A domifit |  Admin{% endblock %}</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+   {% block favicon %}
+    <!-- Favicon -->
+    <link href="back-office/img/favicon.ico" rel="icon">
+     {% endblock %}
+     {% block css %} {% endblock %}
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+  {% block cssAdmin %}
+  
+    <!-- Libraries Stylesheet -->
+    <link href="back-office/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="back-office/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+   
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="back-office/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="back-office/css/style.css" rel="stylesheet">
+     {% endblock %}
+</head>
+{% block bodyadmin %}
+<body>
+    <div class="container-xxl position-relative bg-white d-flex p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+         
+        <div class="sidebar pe-4 pb-3">
+         <nav class="navbar bg-light navbar-light">
+
+
+
+
+            <a href="/coach" class="navbar-brand mx-4 mb-3">
+                <img src="/back-office/img/logoa.png"  style="width: 100px; height: 100px;"  alt="">
+            </a>
+            <div class="d-flex align-items-center ms-4 mb-4">
+                <div class="position-relative">
+                    <img class="rounded-circle"  src={{ vich_uploader_asset(app.user, 'imageFile')  }}  alt="" style="width: 40px; height: 40px;">
+                    <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                </div>
+                <div class="ms-3">
+                    <h6 class="mb-0">{{ app.user.nom }} {{ app.user.prenom }}</h6>
+                    <span>{{app.user.role}}</span>
+                </div>
+            </div>
+            <div class="navbar-nav w-100">
+                <a href="/statistiqueAdmin" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>statistique</a>
+
+                <a href="/listClient" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Client</a>
+              
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Agents</a>
+                    <div class="dropdown-menu bg-transparent border-0">
+                        <a href="/listCoach" class="dropdown-item">coach</a>
+                        <a href="/listNutritionniste" class="dropdown-item">Nutritionniste</a>
+
+                    </div>
+                </div>
+                 <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Produits</a>
+                    <div class="dropdown-menu bg-transparent border-0">
+                        <a href="/listproduits" class="dropdown-item">Produit</a>
+                        <a href="/categorie/produit/" class="dropdown-item">Categorie Produit</a>
+                
+                    </div>
+                     <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Programmes</a>
+                    <div class="dropdown-menu bg-transparent border-0">
+                        <a href="/listProgramme" class="dropdown-item">list programme</a>
+                        <a href="/categorieProg/index" class="dropdown-item">categorie programme</a>
+
+                    </div>
+                    </div>
+                     <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Evenement</a>
+                    <div class="dropdown-menu bg-transparent border-0">
+                        <a href="/listProgramme" class="dropdown-item">Evenement</a>
+                        <a href="/listCategorie" class="dropdown-item">categorie evenement</a>
+
+                    </div>
+                <a href="/forum" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Forum</a>
+            </div>
+        </nav>
+        </div>
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+                <a href="/coach" class="navbar-brand d-flex d-lg-none me-4">
+                    <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
+                </a>
+                <a href="#" class="sidebar-toggler flex-shrink-0">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <form class="d-none d-md-flex ms-4">
+                    <input class="form-control border-0" type="search" placeholder="Search">
+                </form>
+                <div class="navbar-nav align-items-center ms-auto">
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fa fa-envelope me-lg-2"></i>
+                            <span class="d-none d-lg-inline-flex">Message</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                            <a href="#" class="dropdown-item">
+                                <div class="d-flex align-items-center">
+                                    <img class="rounded-circle" src="back-office/img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                    <div class="ms-2">
+                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                        <small>15 minutes ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <div class="d-flex align-items-center">
+                                    <img class="rounded-circle" src="back-office/img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                    <div class="ms-2">
+                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                        <small>15 minutes ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <div class="d-flex align-items-center">
+                                    <img class="rounded-circle" src="back-office/img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                    <div class="ms-2">
+                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                        <small>15 minutes ago</small>
+                                    </div>
+                                </div>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item text-center">See all message</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fa fa-bell me-lg-2"></i>
+                            <span class="d-none d-lg-inline-flex">Notificatin</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                            <a href="#" class="dropdown-item">
+                                <h6 class="fw-normal mb-0">Profile updated</h6>
+                                <small>15 minutes ago</small>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <h6 class="fw-normal mb-0">New user added</h6>
+                                <small>15 minutes ago</small>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item">
+                                <h6 class="fw-normal mb-0">Password changed</h6>
+                                <small>15 minutes ago</small>
+                            </a>
+                            <hr class="dropdown-divider">
+                            <a href="#" class="dropdown-item text-center">See all notifications</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <img class="rounded-circle me-lg-2" src="back-office/img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                            <span class="d-none d-lg-inline-flex">John Doe</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                            <a href="/profil" class="dropdown-item">Profil</a>
+                            <a href="#" class="dropdown-item">Settings</a>
+                            <a href="#" class="dropdown-item">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Navbar End -->
+
+
+            <!-- Sale & Revenue Start -->
+            
+            <!-- Recent Sales End -->
+
+{% block body %} {% endblock %}
+           
+
+           
+        </div>
+        <!-- Content End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+    {% endblock %}
+    {% block js %}  {% endblock %}
+     {% block jsadmin %}
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="back-office/lib/chart/chart.min.js"></script>
+    <script src="back-office/lib/easing/easing.min.js"></script>
+    <script src="back-office/lib/waypoints/waypoints.min.js"></script>
+    <script src="back-office/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="back-office/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="back-office/lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="back-office/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="back-office/js/main.js"></script>
+    {% endblock %}
+</body>
+
+</html>

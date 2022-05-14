@@ -1,0 +1,145 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Modifier Repas{% endblock %}
+
+{% block body %}
+    {% block sidebar %}
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-light navbar-light">
+                 
+
+
+
+                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                    <img src="/back-office/img/logoa.png"  style="width: 100px; height: 100px;"  alt="">
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="position-relative">
+                        <img class="rounded-circle" src="/back-office/img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0">Jhon Doe</h6>
+                        <span>Nutritionniste</span>
+                    </div>
+                </div>
+                <div class="navbar-nav w-100">
+
+                    <a href="/profil" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Profil</a>
+                    
+                    
+                          <a href="/listRegimes" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Mes Regimes</a>
+                                  <a href="/listCatRegime" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Catégories Regimes</a>
+                         
+                           <a href="/listsuiviRegimes" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Liste suivisRégime</a>
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+         {% endblock %}
+
+
+<h1>Modifier Repas</h1>
+<div class="container"> <div class=" text-center mt-5 ">
+        <h1>Modifier Repas</h1>
+    </div>
+    <div class="row ">
+        <div class="col-lg-7 mx-auto">
+            <div class="card mt-2 mx-auto p-4 bg-light">
+                <div class="card-body bg-light">
+                    <div class="container">
+                        
+     {{ form_start(formUpdate,{'attr': {'novalidate': 'novalidate'}} ) }}
+<table>
+{# title #}
+<tr>
+    <td>{{form_label(formUpdate.title , "Titre de repas")}}</td>
+    <td>{{form_widget(formUpdate.title)}}</td>
+</tr>
+<tr>
+    <td class="text-danger">{{form_errors(formUpdate.title )}}</td>
+    <td></td>
+</tr>
+{# start #}
+<tr>
+    <td>{{form_label(formUpdate.start , "Début de repas")}}</td>
+    <td>{{form_widget(formUpdate.start)}}  </td>
+</tr>
+<tr>
+    <td class="text-danger">{{form_errors(formUpdate.start )}} </td>
+    <td></td>
+</tr>
+
+{# end #}
+<tr>
+    <td>{{form_label(formUpdate.end , "Fin de repas")}}</td>
+    <td>{{form_widget(formUpdate.end)}}  </td>
+</tr>
+<tr>
+    <td class="text-danger">{{form_errors(formUpdate.end )}} </td>
+    <td></td>
+</tr>
+
+{# description #}
+<tr>
+    <td>{{form_label(formUpdate.description , "description de repas")}}</td>
+    <td>{{form_widget(formUpdate.description)}}  </td>
+</tr>
+<tr>
+    <td class="text-danger">{{form_errors(formUpdate.description )}} </td>
+    <td></td>
+</tr>
+
+
+{# Toujour #}
+<tr>
+    <td>{{form_label(formUpdate.allday , "Toujour valide ! ")}}</td>
+    <td>{{form_widget(formUpdate.allday)}}  </td>
+</tr>
+<tr>
+    <td class="text-danger">{{form_errors(formUpdate.allday )}} </td>
+    <td></td>
+</tr>
+
+{# background_color #}
+<tr>
+    <td>{{form_label(formUpdate.background_color , "Coueleur fond:")}}</td>
+    <td>{{form_widget(formUpdate.background_color)}}  </td>
+</tr>
+<tr>
+    <td class="text-danger">{{form_errors(formUpdate.background_color )}} </td>
+    <td></td>
+</tr>
+
+{# border_color #}
+<tr>
+    <td>{{form_label(formUpdate.border_color , "Couleur bordure: ")}}</td>
+    <td>{{form_widget(formUpdate.border_color)}}  </td>
+</tr>
+<tr>
+    <td class="text-danger">{{form_errors(formUpdate.border_color )}} </td>
+    <td></td>
+</tr>
+
+{# text_color #}
+<tr>
+    <td>{{form_label(formUpdate.text_color , "Couleur texte ")}}</td>
+    <td>{{form_widget(formUpdate.text_color)}}  </td>
+</tr>
+<tr>
+    <td class="text-danger">{{form_errors(formUpdate.text_color )}} </td>
+    <td></td>
+</tr>
+
+</table>
+{{form_row(formUpdate.save,{'label':'Modifier '})}}
+{{form_end(formUpdate)}}
+
+                    </div>
+                </div>
+            </div> <!-- /.8 -->
+        </div> <!-- /.row-->
+    </div>
+</div>
+
+{% endblock %}

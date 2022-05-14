@@ -4,7 +4,7 @@
 
 {% block body %}
  <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="front-office/img/breadcrumb-bg.jpg">
+    <section class="breadcrumb-section set-bg" data-setbg="/front-office/img/breadcrumb-bg.jpg">
           <div class="container">
             <div class="row">
                 <div class="col-lg-8 p-0 m-auto">
@@ -12,7 +12,7 @@
                         <h3>Liste des produits</h3>
                         <ul>
                             <li>by Admin</li>
-                            <li>Aug,15, 2019</li>
+                            <li>Jan,20, 2022</li>
                             <li>20 Comment</li>
                         </ul>
                     </div>
@@ -37,97 +37,34 @@
                 </div>
             </div>
             <div class="row">
+
+                {% for produit in produits %}
                 <div class="col-lg-4 col-sm-6">
-                    <div class="ts-item set-bg" data-setbg="front-office/img/team/team-1.jpg">
+                    <div class="ts-item set-bg" data-setbg="{{ asset('picture/' ~ produit.image) }}">
                         <div class="ts_text">
-                            <h4>Athart Rachel</h4>
-                            <span>Gym Trainer</span>
-                            <div class="tt_social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-youtube-play"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa  fa-envelope-o"></i></a>
+                            <h4>{{ produit.nom }}</h4>
+                            <span>{{ produit.prix }}</span>
+                            <div >
+
+
                             </div>
                         </div>
+
+                    </div>
+
+                    <a  style="border-radius: 50% 20% / 10% 40%;background: #f36100;float: right;" class="p-1 mb-1  text-white "
+                        href="{{ path('passer',{'id':produit.id}) }}"> Passer Commande </a>
+                    <div class="like">
+
+                        <a href="{{ path('likeeventProduit',{'id':produit.id}) }}" class="fa fa fa-thumbs-up">Like({{ produit.jaime }})</a>
+                        <a href="{{ path('dislikeeventProduit',{'id':produit.id}) }}" class="fa fa fa-thumbs-down">Dislike({{ produit.jaimepas }})</a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="ts-item set-bg" data-setbg="front-office/img/team/team-2.jpg">
-                        <div class="ts_text">
-                            <h4>Athart Rachel</h4>
-                            <span>Gym Trainer</span>
-                            <div class="tt_social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-youtube-play"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa  fa-envelope-o"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="ts-item set-bg" data-setbg="front-office/img/team/team-3.jpg">
-                        <div class="ts_text">
-                            <h4>Athart Rachel</h4>
-                            <span>Gym Trainer</span>
-                            <div class="tt_social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-youtube-play"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa  fa-envelope-o"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="ts-item set-bg" data-setbg="front-office/img/team/team-4.jpg">
-                        <div class="ts_text">
-                            <h4>Athart Rachel</h4>
-                            <span>Gym Trainer</span>
-                            <div class="tt_social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-youtube-play"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa  fa-envelope-o"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="ts-item set-bg" data-setbg="front-office/img/team/team-5.jpg">
-                        <div class="ts_text">
-                            <h4>Athart Rachel</h4>
-                            <span>Gym Trainer</span>
-                            <div class="tt_social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-youtube-play"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa  fa-envelope-o"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="ts-item set-bg" data-setbg="front-office/img/team/team-6.jpg">
-                        <div class="ts_text">
-                            <h4>Athart Rachel</h4>
-                            <span>Gym Trainer</span>
-                            <div class="tt_social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-youtube-play"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa  fa-envelope-o"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+
+
+                {% endfor %}
+
         </div>
     </section>
     <!-- Team Section End -->

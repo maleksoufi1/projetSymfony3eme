@@ -1,0 +1,76 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Hello RegimeController!{% endblock %}
+
+{% block body %}
+
+ {% block sidebar %}
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-light navbar-light">
+                 
+
+
+
+                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                    <img src="/back-office/img/logoa.png"  style="width: 100px; height: 100px;"  alt="">
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="position-relative">
+                        <img class="rounded-circle" src="/back-office/img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0">Jhon Doe</h6>
+                        <span>Nutritionniste</span>
+                    </div>
+                </div>
+                <div class="navbar-nav w-100">
+
+                    <a href="/statistique" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Profil</a>
+                    
+                    <a href="/statRegime" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Statistiques</a>
+                          <a href="/listRegimes" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Mes Regimes</a>
+                            <a href="/listCatRegime" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Catégories Regimes</a>
+                         
+                           <a href="/listsuiviRegimes" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Liste suivisRégime</a>
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+         {% endblock %}
+Liste des Suivis par regime : 
+
+
+
+
+
+
+
+ <table class="table">
+        <thead>
+            <tr>
+          
+    <th>note</th>
+<th>remarque</th>
+<th>client </th>
+<th>regime</th>
+            </tr>
+        </thead>
+        <tbody>
+      {% for sr in suiviRegimes %}
+<tr>
+<td>{{sr.note}}</td>
+<td>{{sr.remarque}}</td>
+<td>{{ sr.user }}</td>
+<td>{{ sr.regime }}</td>
+<td><a href="{{ path( 'CalendarSuivi' , {'id':sr.id} )}}"> Calendar </a> </td>
+<td><a href="{{ path( 'deletesuiviRegime' , {'id':sr.id} )}}"> Delete </a> </td>
+<td><a href="{{ path( 'updatesuiviRegime' , {'id':sr.id} )}}"> Update </a> </td>
+</tr>
+      
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('addsuiviRegime') }}">Ajouter SuivisRégime</a>
+{% endblock %}

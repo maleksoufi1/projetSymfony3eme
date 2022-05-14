@@ -1,0 +1,75 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Liste des repas</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+           
+             
+                        <div class="h-100 bg-light rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <h6 class="mb-0">To Do List</h6>
+                            </div>
+                             <div class="text-white bg-success">Aujourd'hui</div>
+                              {% for r in repas %}
+                              {% if r.start|date('Y-m-d') ==  "now"|date('Y-m-d') %}
+                               <div class="d-flex align-items-center border-bottom py-2">
+                                <input class="form-check-input m-0" name="check" type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div class="w-100 ms-3">
+                                    <div class="d-flex w-100 align-items-center justify-content-between">
+                                
+                                    
+                                        <span> {{r.title}}</span> 
+                                        <span> {{r.description}}</span>
+                                        <span>{{r.start|date('H:i')}} - {{r.end|date('H:i')}}<span>
+                                        <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                              {% endif %}
+                              {% endfor %}
+
+                               <div class="text-white bg-danger">Manquant</div>
+                                {% for r in repas %}
+                                {% if r.start|date('Y-m-d') < "now"|date('Y-m-d') %}
+                                
+                                 <div class="d-flex align-items-center border-bottom py-2">
+                                <input class="form-check-input m-0" type="checkbox" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div class="w-100 ms-3">
+                                    <div class="d-flex w-100 align-items-center justify-content-between">
+                                   
+                                        <span> <del>{{r.title}}</del></span>
+                                         <span>{{r.start|date('Y-m-d H:i')}} - {{r.end|date('H:i')}}<span>
+                                        <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                                 {% endif %}
+                                   {% endfor %}
+                   
+                           
+                        </div>
+                         <div class="text-black">Remarque de votre nutritionniste : </div>
+                        {% for sr in suiviRegime %}
+                    {% if sr.remarque != null %}
+                   <div class="text-black"><p> {{ sr.remarque }}</p> </div>
+                   {% else %}
+                   <div class="text-black"><p> Pas de remarque pour le maintenant </p> </div>
+                    {% endif %}
+                     {% endfor %}
+                     
+                     
+      </div>
+      <div class="modal-footer">
+    
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+       
+      </div>
+    </div>
+  </div>
+</div>

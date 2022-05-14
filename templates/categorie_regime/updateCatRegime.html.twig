@@ -1,0 +1,110 @@
+
+
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Modifier Catégorie Régime{% endblock %}
+
+{% block body %}
+  {% block sidebar %}
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-light navbar-light">
+                 
+
+
+
+                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                    <img src="/back-office/img/logoa.png"  style="width: 100px; height: 100px;"  alt="">
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="position-relative">
+                        <img class="rounded-circle" src="/back-office/img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0">Jhon Doe</h6>
+                        <span>Nutritionniste</span>
+                    </div>
+                </div>
+                <div class="navbar-nav w-100">
+
+                    <a href="#" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Profil</a>
+                    
+                    
+                          <a href="/listRegimes" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Mes Regimes</a>
+                                  <a href="/listCatRegime" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Catégories Regimes</a>
+                         
+                           <a href="/listsuiviRegimes" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Liste suivisRégime</a>
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+         {% endblock %}
+
+    <h1>Modifier Catégorie Régime</h1>
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container"> <div class=" text-center mt-5 ">
+        <h1>Ajouter Régime</h1>
+    </div>
+    <div class="row ">
+        <div class="col-lg-7 mx-auto">
+            <div class="card mt-2 mx-auto p-4 bg-light">
+                <div class="card-body bg-light">
+                    <div class="container">
+                        
+    
+    {{ form_start(formUpdateCatRegime,{'attr': {'novalidate': 'novalidate'}} ) }}
+<table>
+{# type #}
+<tr>
+    <td>{{form_label(formUpdateCatRegime.libelle , "libelle de catégorie")}}</td>
+    <td>{{form_widget(formUpdateCatRegime.libelle)}}</td>
+</tr>
+<tr>
+    <td class="text-danger">{{form_errors(formUpdateCatRegime.libelle )}}</td>
+    <td></td>
+</tr>
+{# description #}
+<tr>
+    <td>{{form_label(formUpdateCatRegime.description , "Description de catégorie")}}</td>
+    <td>{{form_widget(formUpdateCatRegime.description)}}  </td>
+</tr>
+<tr>
+    <td class="text-danger">{{form_errors(formUpdateCatRegime.description )}} </td>
+    <td></td>
+</tr>
+<tr>
+    <td>{{form_label(formUpdateCatRegime.statcolor , "StatColor de catégorie")}}</td>
+    <td>{{form_widget(formUpdateCatRegime.statcolor)}}  </td>
+</tr>
+<tr>
+    <td class="text-danger">{{form_errors(formUpdateCatRegime.statcolor )}} </td>
+    <td></td>
+</tr>
+
+</table>
+{{form_row(formUpdateCatRegime.save,{'label':'Modifier'})}}
+{{form_end(formUpdateCatRegime)}}
+                    </div>
+                </div>
+            </div> <!-- /.8 -->
+        </div> <!-- /.row-->
+    </div>
+</div>
+{% endblock %}

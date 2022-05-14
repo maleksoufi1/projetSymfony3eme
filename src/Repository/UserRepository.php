@@ -22,23 +22,30 @@ class UserRepository extends ServiceEntityRepository
     }
 
 
-    public function upgradePassword(UserInterface $user, string $newHashedPassword): void
+  /**
+     * get all posts
+     *
+     * @return array
+     */
+    public function findAllPosts()
     {
-        if (!$user instanceof User) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
-        }
-
-        $user->setPassword($newHashedPassword);
-        $this->_em->persist($user);
-        $this->_em->flush();
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT a
+         FROM App:User a   
+      
+         ORDER BY a.id DESC'
+            )
+            ->getArrayResult();
     }
+
 
     public function findEntitiesByString($str){
         return $this->getEntityManager()
             ->createQuery(
                 'SELECT p
-                FROM AppBundle:User p
-                WHERE p.nom LIKE :str'
+                FROM App:User p
+                WHERE p.nom LIKE :str OR p.prenom LIKE :str'
             )
             ->setParameter('str', '%'.$str.'%')
             ->getResult();

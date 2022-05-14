@@ -1,0 +1,57 @@
+{% extends 'basepdf.html.twig' %}
+
+{% block title %}CreateProgramme{% endblock %}
+{% block pdf %} {% endblock %}
+{% block body %}
+    <h1>CreateProgramme</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ create_programme.id }}</td>
+            </tr>
+            <tr>
+                <th>Lundi</th>
+                <td>{{ create_programme.lundi }}</td>
+            </tr>
+            <tr>
+                <th>Mardi</th>
+                <td>{{ create_programme.mardi }}</td>
+            </tr>
+            <tr>
+                <th>Mercredi</th>
+                <td>{{ create_programme.mercredi }}</td>
+            </tr>
+            <tr>
+                <th>Jeudi</th>
+                <td>{{ create_programme.jeudi }}</td>
+            </tr>
+            <tr>
+                <th>Vendredi</th>
+                <td>{{ create_programme.vendredi }}</td>
+            </tr>
+            <tr>
+                <th>Samedi</th>
+                <td>{{ create_programme.samedi }}</td>
+            </tr>
+            <tr>
+                <th>Dimanche</th>
+                <td>{{ create_programme.dimanche }}</td>
+            </tr>
+            <tr>
+                <th>Conseils</th>
+                <td>{{ create_programme.conseils }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+   <a  style="border : 50% 20% / 10% 40%;background: #f36100;float: right;" class="p-1 mb-1  text-white " href="{{ path('create_programme_index') }}">back to list</a>
+    
+
+    <a  style="border : 50% 20% / 10% 40%;background:#FF0000;float: right;" class="p-1 mb-1  text-white " href="{{ path('create_programme_edit', {'id': create_programme.id}) }}">edit</a>
+
+    
+
+    {{ include('create_programme/_delete_form.html.twig') }}
+{% endblock %}

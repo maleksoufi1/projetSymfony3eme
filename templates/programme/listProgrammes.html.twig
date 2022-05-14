@@ -1,0 +1,152 @@
+{% extends 'base-back.html.twig' %}
+{% block body %}
+ <h1>Lists of Programmes!</h1>
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+
+<h2>chercher dynamiquement !!</h2>
+
+            <div class="sidebar-search">
+
+                <div class="input-group custom-search-form">
+
+                    <input type="text" id="search" class="form-control" placeholder="Search here">
+                </div>
+                <!-- /input-group -->
+            </div>
+            <ul class="nav" id="side-menu">
+                <li>
+                    <a href="#"> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level" id="entitiesNav">
+                    </ul>
+                </li>
+            </ul><br><br><br><br>
+
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+            <script type="text/javascript">
+                jQuery(document).ready(function() {
+                    var searchRequest = null;
+                    $("#search").keyup(function() {
+                        var minlength = 1;
+                        var that = this;
+                        var value = $(this).val();
+                        var entitySelector = $("#entitiesNav").html('');
+                        if (value.length >= minlength ) {
+                            if (searchRequest != null)
+                                searchRequest.abort();
+                            searchRequest = $.ajax({
+                                type: "GET",
+                                url: "{{ path('searchProgramme') }}",
+                                data: {
+                                    'q' : value
+                                },
+                                dataType: "text",
+                                success: function(msg){
+                                    //we need to check if the value is the same
+                                    if (value===$(that).val()) {
+                                        var result = JSON.parse(msg);
+                                        $.each(result, function(key, arr) {
+                                            $.each(arr, function(id, value) {
+                                                if (key === 'posts') {
+                                                    if (id !== 'error') {
+                                                        console.log(value[1]);
+                                                        console.log(value[0]);
+                                                        entitySelector.append('<li><b>'+value[0]+'</b><a href="/programme_show/'+id+'">'+'<img src="picture/'+value[1]+' " style="width: 50px; height: 50px"/>'+'</a></li>');
+                                                       //entitySelector.append(' <div class="row"> <div class="col-lg-8 p-0"><div class="blog-item"> <div class="bi-pic"> <img src="public/picture/'+value[1]+'"></div> <div class="bi-text">  <h5><a href="#">'+value[1]+'</a></h5> <p><a  style="border-radius: 50% 20% / 10% 40%;background: #f36100;float: right;" class="p-1 mb-1  text-white " href="/detailRegime/'+id+'"> Détails </a> </p></div> </div>');
+                                                    } else {
+                                                        entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                                    }
+                                                }
+                                            });
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
+            </script>
+
+{% block title %}Programme {% endblock %}
+
+
+{{ form_start(form) }}
+
+<div class="form-row align-items-end" >
+ <div class="col">
+   {{ form_row(form.nom) }}
+ </div>
+
+  <div class="col">
+   <div class="form-group">
+      <button  style="border : 50% 20% / 10% 40%;background: #f36100;float:right;" class="p-1 mb-1  text-white "type="submit" class="btn btn-success">Rechercher</button>
+    </div>
+ </div>
+</div>
+ {{ form_end(form) }}
+
+  
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>titre</th>
+                <th>Description</th>
+                <th>type</th>
+                <th>affiche</th>
+                <th>difficulte</th>
+                <th>image</th>
+                <th>coach</th>
+                <th>categorie_programme</th>
+                <th>j'aime</th>
+                <th>j'aime pas</th>
+                <th>rate</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for programme in programmes %}
+            <tr>
+            
+
+                <td>{{ programme.id }}</td>
+                <td>{{ programme.titre }}</td>
+                <td>{{ programme.description }}</td>
+                <td>{{ programme.type }}</td>
+                <td>{{ programme.affiche }}</td>
+                <td>{{ programme.difficulte }}</td>
+                 <td><img src="{{ asset('picture/' ~ programme.image) }}" alt="" width="90" height="90"></td>
+               
+                <td>{{ programme.user}}</td>
+                <td>{{ programme.categorieProgramme }}</td>
+                <td>{{ programme.jaime }}</td>
+                <td>{{ programme.jaimepas }}</td>
+                
+    
+
+                
+                <td>
+                 <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+        <input type="hidden" name="note" id="note" value="0">
+         <script src="js/scripts.js"></script>
+                    <a  style="border : 50% 20% / 10% 40%;background: #f36100;float: right;" class="p-1 mb-1  text-white " href="{{ path('updateProgramme',{'id':programme.id} )}}">Update</a>
+                    <a  style="border : 50% 20% / 10% 40%;background: #FF0000;float: right;" class="p-1 mb-1  text-white " href="{{ path('deleteProgramme',{'id':programme.id} )}}">Delete</a>
+                    <a  style="border : 50% 20% / 10% 40%;background: #f36100;float: right;" class="p-1 mb-1  text-white " href="{{ path('prgramme_show',{'id':programme.id} )}}">Show</a>
+
+                </td>
+            </tr>
+       
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a  style="border : 50% 20% / 10% 40%;background: #f36100;float: right;" class="p-1 mb-1  text-white " href="{{ path('addProgramme')}}">Create new</a>
+<a  style="border : 50% 20% / 10% 40%;background: #FF0000;float: right;" class="p-1 mb-1  text-white " href="{{ path('listP')}}">Imprimer</a>
+{% endblock %}

@@ -1,0 +1,84 @@
+
+
+
+{% extends '/base-back.html.twig' %}
+
+{% block title %}Modifier Régime{% endblock %}
+
+{% block body %}
+ 
+     <h1>Modifier Régime</h1>
+
+   
+
+
+    {{ form_start(formUpdateRegime,{'attr': {'novalidate': 'novalidate'}} ) }}
+<table>
+{# type #}
+<tr>
+    <td>{{form_label(formUpdateRegime.type , "Type de régime")}}</td>
+    <td>{{form_widget(formUpdateRegime.type)}}</td>
+</tr>
+<tr>
+    <td class="text-danger">{{form_errors(formUpdateRegime.type )}}</td>
+    <td></td>
+</tr>
+{# description #}
+<tr>
+    <td>{{form_label(formUpdateRegime.description , "Description de régime")}}</td>
+    <td>{{form_widget(formUpdateRegime.description)}}  </td>
+</tr>
+<tr>
+    <td class="text-danger">{{form_errors(formUpdateRegime.description )}} </td>
+    <td></td>
+</tr>
+{# dificulte #}
+<tr>
+    <td>{{form_label(formUpdateRegime.dificulte , "dificulte de régime")}}</td>
+    <td>{{form_widget(formUpdateRegime.dificulte)}}</td>
+</tr>
+<tr>
+    <td class="text-danger">{{form_errors(formUpdateRegime.dificulte )}} </td>
+    <td></td>
+</tr>
+
+{# categorieRegime #}
+<tr>
+    <td>{{form_label(formUpdateRegime.CategorieRegime , "categorieRegime de régime")}}</td>
+    <td>{{form_widget(formUpdateRegime.CategorieRegime)}}</td>
+</tr>
+<tr>
+    <td class="text-danger">{{form_errors(formUpdateRegime.CategorieRegime )}}</td>
+    <td></td>
+</tr>
+
+
+{# prix #}
+<tr>
+    <td>{{form_label(formUpdateRegime.prix , "prix de régime")}}</td>
+    <td>{{form_widget(formUpdateRegime.prix)}}</td>
+</tr>
+<tr>
+    <td class="text-danger">{{form_errors(formUpdateRegime.prix )}}</td>
+    <td></td>
+</tr>
+{# image #}
+<tr>
+<td>{{form_label(formUpdateRegime.image , "image de régime :")}}</td>
+</tr>
+<td> <img class="rounded-circle" src="{{asset('uploads/images/' ~ regime.image )}}" alt="" style="width: 40px; height: 40px;"></td>
+   <tr>
+<td>{{form_widget(formUpdateRegime.image)}}</td>
+</tr>
+<tr>
+    <td class="text-danger">{{form_errors(formUpdateRegime.image )}}</td>
+    <td></td>
+</tr>
+
+
+</table>
+{{form_row(formUpdateRegime.save,{'label':'Modifier'})}}
+{{form_end(formUpdateRegime)}}
+<a href="{{ path('listRegimes') }}">Liste des Régimes</a>
+{% endblock %}
+

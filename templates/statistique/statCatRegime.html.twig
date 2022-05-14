@@ -1,0 +1,132 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Hello StatistiqueController!{% endblock %}
+{% block css %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/helpers.esm.min.js" integrity="sha512-urWBnIv+F027G24xDNigjxvIuwnWlWy94W2yx77VkISKLzKSohOKOubMDhtEF6LZcEH7gctmNSpxDqIW/zMmUg=="
+ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  {% endblock %}
+{% block body %}
+{% block sidebar %}
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-light navbar-light">
+                 
+
+
+
+                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                    <img src="/back-office/img/logoa.png"  style="width: 100px; height: 100px;"  alt="">
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="position-relative">
+                        <img class="rounded-circle" src="/back-office/img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0">Jhon Doe</h6>
+                        <span>Nutritionniste</span>
+                    </div>
+                </div>
+                <div class="navbar-nav w-100">
+
+                    <a href="/statistique" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Profil</a>
+                    <a href="/statRegime" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Statistiques</a>
+                    
+                          <a href="/listRegimes" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Mes Regimes</a>
+                                  <a href="/listCatRegime" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Catégories Regimes</a>
+                         
+                           <a href="/listsuiviRegimes" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Liste suivisRégime</a>
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+         {% endblock %}
+    <div class="container ">
+   
+      <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                   <div class="col-sm-12 col-xl-6" style="border: 1px solid black;">
+                        <div class="bg-light rounded h-100 p-2">
+                            <h6 class="mb-4">Les régimes plus vendu</h6>
+                        <canvas id="regimes" width="400" height="100"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-xl-6" style="border: 1px solid black;">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Nombre Régimes par catégorie</h6>
+                           <canvas id="categories" width="400" height="100"></canvas>
+                        </div>
+                    </div>
+
+                     <div class="" style="border: 1px solid black;">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Regime Date</h6>
+                           <canvas id="regimesDate" width="400" height="100"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+      </div>
+{% block js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" 
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+ let regimesDate = document.querySelector("#regimesDate")
+    let annGraph = new Chart(regimesDate, {
+        type: "line",
+        data: {
+            labels: {{ dates|raw }},
+            datasets: [{
+                label: "Nombre d'regimesDate",
+                data: {{ regDateCount|raw }},
+                 fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                 tension: 0.1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    })
+const categories = document.getElementById('categories').getContext('2d');
+ let categGraph = new Chart(categories, {
+        type: "pie",
+        data: {
+            labels: {{ NomCateg|raw }},
+            datasets: [{
+                label: "Répartition des catégories",
+                data: {{ CountCateg|raw }},
+                backgroundColor: {{ ColorCateg|raw }},
+            borderWidth: 3
+            }]
+        }
+    });
+
+
+    const regimes = document.getElementById('regimes').getContext('2d');
+ let regimesGraph = new Chart(regimes, {
+        type: "doughnut",
+        data: {
+            labels: {{ NomReg|raw }},
+            datasets: [{
+                label: "Répartition des régimes",
+                data: {{ CountSuivi|raw }},
+                backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)',
+    ],
+            borderWidth: 3
+            }]
+        }
+    });
+</script>
+ {% endblock %}
+{% endblock %}

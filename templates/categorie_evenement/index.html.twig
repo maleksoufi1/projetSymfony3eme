@@ -1,0 +1,117 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Hello CategorieEvenementController!{% endblock %}
+
+{% block body %}
+<!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="front-office/img/breadcrumb-bg.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 p-0 m-auto">
+                    <div class="bh-text">
+                        <h3>Catégorie des Evenements</h3>
+                        <ul>
+                            <li>by Admin</li>
+                            <li>Aug,15, 2019</li>
+                            <li>20 Comment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+<!-- Team Section Begin -->
+    <section class="team-section team-page spad">
+        <div class="container">
+        <div class="container">
+         <h3 class="text-white">Rechercher <h3>
+           <div class="sidebar-search">
+
+                <div class="input-group custom-search-form">
+
+                    <input type="text" id="search" class="form-control" placeholder="Search here">
+                </div>
+              
+            </div>
+            <ul class="nav" id="side-menu">
+                <li>
+                   
+                    <ul class="nav nav-second-level" id="entitiesNav">
+                    </ul>
+                </li>
+            </ul><br><br>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+            <script type="text/javascript">
+                jQuery(document).ready(function() {
+                    var searchRequest = null;
+                    $("#search").keyup(function() {
+                        var minlength = 1;
+                        var that = this;
+                        var value = $(this).val();
+                        var entitySelector = $("#entitiesNav").html('');
+                        if (value.length >= minlength ) {
+                            if (searchRequest != null)
+                                searchRequest.abort();
+                            searchRequest = $.ajax({
+                                type: "GET",
+                                url: "{{ path('searchEvenement') }}",
+                                data: {
+                                    'q' : value
+                                },
+                                dataType: "text",
+                                success: function(msg){
+                                    //we need to check if the value is the same
+                                    if (value===$(that).val()) {
+                                        var result = JSON.parse(msg);
+                                        $.each(result, function(key, arr) {
+                                            $.each(arr, function(id, value) {
+                                                if (key === 'posts') {
+                                                    if (id !== 'error') {
+                                                        console.log(value[1]);
+ entitySelector.append(' <div class="row"> <div class="col-lg-8 p-0"><div class="blog-item"> <div class="bi-pic"> <img src="/uploads/images/'+value[0]+'"></div> <div class="bi-text">  <h5><a href="#">'+value[1]+'</a></h5> <p><a  style="border-radius: 50% 20% / 10% 40%;background: #f36100;float: right;" class="p-1 mb-1  text-white " href="/listEvenementC/'+id+'"> Détails </a> </p></div> </div>');
+                             } else {
+                                                        entitySelector.append('<li class="errorLi text-white">'+value+'</li>');
+                                                    }
+                                                }
+                                            });
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
+            </script>
+           
+
+
+
+            
+            </div>
+            <div class="row">
+             {% for c in categories%}
+                <div class="col-lg-4 col-sm-6">
+                    <div class="ts-item set-bg" data-setbg="{{asset('uploads/images/' ~  c.image )}}">
+                        <div class="ts_text">
+                            <h4>{{c.libelle}}</h4>
+                            <span>{{c.description}}</span>
+                            <div class="tt_social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-youtube-play"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a href="#"><i class="fa  fa-envelope-o"></i></a>
+                            </div>
+                            <a href="{{ path( 'listEvenementC' , {'id':c.id} )}}" class="primary-btn btn-normal appoinment-btn">Voir Plus</a>
+                        </div>
+                    </div>
+                </div>
+           {% endfor %}
+        </div>
+        {{ knp_pagination_render(categories) }}
+    </div>
+    </section>
+    <!-- Team Section End -->
+{% endblock %}

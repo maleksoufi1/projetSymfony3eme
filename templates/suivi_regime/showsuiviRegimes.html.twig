@@ -1,0 +1,253 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}A domifit | Suivi{% endblock %}
+
+{% block body %}
+
+    
+      <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="/front-office/img/breadcrumb-bg.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb-text">
+                        <h2>Votre Suivi Régime</h2>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- BMI Calculator Section Begin -->
+    <section class="bmi-calculator-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="section-title chart-title">
+                        <span>vérifier ton corps</span>
+                        <h2>TABLEAU DE CALCULATEUR IMC</h2>
+                    </div>
+                    <div class="chart-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Bmi</th>
+                                    <th>STATUT DE POIDS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="point">Au dessous de 18.5</td>
+                                    <td>Poids insuffisant</td>
+                                </tr>
+                                <tr>
+                                    <td class="point">18.5 - 24.9</td>
+                                    <td>Healthy</td>
+                                </tr>
+                                <tr>
+                                    <td class="point">25.0 - 29.9</td>
+                                    <td>En surpoids</td>
+                                </tr>
+                                <tr>
+                                    <td class="point">30.0 - et ci-dessus</td>
+                                    <td>Obése</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="section-title chart-calculate-title">
+                        <span>vérifier ton corps</span>
+                        <h2>CALCULEZ VOTRE IMC</h2>
+                    </div>
+                    <div class="chart-calculate-form">
+                        <p>L'indice de masse corporelle ou IMC (BMI en anglais pour Body Mass Index) permet de déterminer la corpulence d'une personne. 
+                        Cet indice de masse corporelle se calcule en fonction de la taille (en mètres) et du poids (en kilogrammes).
+                         Il n'est correctement interprétable que pour un adulte de 18 à 65 ans. L'IMC est le rapport du poids (en kg) sur la taille (en mètre) élevée au carré.</p>
+                        <form onSubmit=" return false;">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <input   id="height" type="text" placeholder="Entrez votre taille (en cm) ici.">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input  id="weight" type="text" name="poids"  placeholder="Entrez votre poids ici.">
+                                </div>
+                              
+                                <div class="col-lg-12">
+                                     <button id="btn">Calculate</button>
+  
+        <div id="result" class="text-warning"></div>
+                                </div><br><br><br>
+                               
+                            </div>
+                        </form>
+                        
+                       
+                    </div>
+                </div>
+            </div>
+        </div><br><br><br><br>
+        <section >
+        
+        <div class="container" style=" ">
+     
+
+              <!-- updated -->
+          <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb-text">
+                        <h2> Votre Plannings Repas </h2>
+                    {% for sr in suiviRegime %}
+                    {% if sr.titre != null %}
+                    <div class="text-white"><h5> Titre de suivis : {{sr.titre}} </h5></div>
+                    {% endif %}
+                     {% endfor %}
+                    </div>
+                </div>
+            </div>
+    <div id="calendrier" style ="width:100%;padding:50PX;  margin:auto;background: #ffff; opacity:.9;">
+    </div>
+    </div>
+    </section>
+
+
+
+    <section>
+    <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb-text">
+                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Validation Repas d'aujourd'hui </button>
+         {% include 'suivi_regime/ModalToDo.html.twig' with {repas: repas , suiviRegime: suiviRegime } only  %}
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </section>
+     
+    </section>
+
+
+    <!-- BMI Calculator Section End -->
+    
+    <!---->
+
+
+
+
+
+
+
+
+
+
+
+
+{% block jsClendar %}
+<script>
+window.onload = () => {  
+    
+    let calendarElt = document.querySelector("#calendrier")
+
+    let calendar = new FullCalendar.Calendar(calendarElt ,{
+      initialView: 'dayGridMonth'  ,
+      locale : 'fr',
+      headerToolbar: {
+          start: 'prev,next today',
+          center: 'title',
+          end: 'dayGridMonth,timeGridWeek'
+      },
+      events:{{ data|raw}},
+  
+    })
+   
+    calendar.render()
+
+    let button = document.querySelector("#btn");
+  
+    // Function for calculating BMI
+    button.addEventListener("click", calculateBMI);
+};
+  
+function calculateBMI() {
+  
+    /* Getting input from user into height variable.
+    Input is string so typecasting is necessary. */
+    let height = parseInt(document
+            .querySelector("#height").value);
+  
+    /* Getting input from user into weight variable. 
+    Input is string so typecasting is necessary.*/
+    let weight = parseInt(document
+            .querySelector("#weight").value);
+  
+    let result = document.querySelector("#result");
+     var entitySelector = $("#result").html('');
+     
+    // Checking the user providing a proper
+    // value or not
+    if (height === "" || isNaN(height)) 
+        result.innerHTML = "Donner valide Taille !";
+  
+    else if (weight === "" || isNaN(weight)) 
+        result.innerHTML = "Donner valide Poid !";
+  
+    // If both input is valid, calculate the bmi
+    else {
+  
+        // Fixing upto 2 decimal places
+    
+             height = (height*0.01)*(height*0.01)          //convertion de la taille des centimètres en mètres   //taille au carré
+			let bmi = (weight/height).toFixed(2);
+  if (bmi <= 16)
+			{
+
+            entitySelector.append(<div class="text-white">  <h2>Votre Imc =  </h2>  <div class="breadcrumb-text"> <h2> ${bmi}</h2></div>  <p>Votre indice est un très faible, c'est à dire que vous êtes très maigre. Il faut faire très attention, je vous recomande de voir un nutrioniste!</p> </div>);
+			}
+			if (bmi <=18 && bmi >16)
+			{
+            entitySelector.append(<div class="text-white"> <h2>Votre Imc = </h2>  <div class="breadcrumb-text"> <h2>${bmi}</h2></div> <p>Votre indice est faible, vous êtes maigre, il faut surveiller votre ligne!</p> </div>);
+			}
+			if (bmi <=20 && bmi >18)
+			{
+            entitySelector.append(<div class="text-white"> <h2>Votre Imc = </h2>  <div class="breadcrumb-text"> <h2>${bmi}</h2></div> <p>Vous êtes en leger + sous-poids + , il faut manger !</p> </div>);
+			}
+			if (bmi <=24 && bmi >20)
+			{
+            entitySelector.append(<div class="text-white"> <h2>Votre Imc = </h2>  <div class="breadcrumb-text"> <h2>${bmi}</h2></div> <p>Vous êtes dans la moyenne, ne vous inquietez pas !</p> </div>);
+			}
+			if (bmi <=26 && bmi >24)
+			{
+            entitySelector.append(<div class="text-white"> <h2>Votre Imc = </h2>  <div class="breadcrumb-text"> <h2>${bmi}</h2></div> <p>Vous êtes en très leger sur-poids, ce n'est pas bien grave</p> </div>);
+			}
+			if (bmi <=28 && bmi >26)
+			{
+            entitySelector.append(<div class="text-white"> <h2>Votre Imc = </h2>  <div class="breadcrumb-text"> <h2>${bmi}</h2></div> <p>Vous êtes en sur-poids mais ce n'est pas iratrappable !</p> </div>);
+			}
+			if (bmi <=32 && bmi >28)
+			{
+            entitySelector.append(<div class="text-white"> <h2>Votre Imc = </h2>  <div class="breadcrumb-text"> <h2>${bmi}</h2></div> <p>Vous êtes en sur-poids!</p> </div>);
+			
+			}
+			if (bmi >32)
+			{
+                entitySelector.append(<div class="text-white"> <h2>Votre Imc = </h2>  <div class="breadcrumb-text"> <h2>${bmi}</h2></div> <p>Vous êtes vraiment en sur-poids, je vous conseil de voir un nutritioniste pour qu'il vous adapte un regime personnalisé.!</p> </div>);
+
+			}
+			
+      
+    }
+}
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js" 
+    integrity="sha256-YicH/8aE660iEnJtgll3vT54dJApy3XkYmqNfGVFEzA=" crossorigin="anonymous"></script>
+{% endblock %}
+
+
+    
+{% endblock %}

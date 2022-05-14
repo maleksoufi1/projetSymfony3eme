@@ -19,32 +19,43 @@ class ProgrammeRepository extends ServiceEntityRepository
         parent::__construct($registry, Programme::class);
     }
 
-    // /**
-    //  * @return Programme[] Returns an array of Programme objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+  
+    public function findProgrammesByCat($categorie_programme_id ){
 
-    /*
-    public function findOneBySomeField($value): ?Programme
-    {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        ->Where('p.categorieProgramme =:categorieProgramme')
+        ->setParameter('categorieProgramme',$categorie_programme_id)
+        ->getQuery()
+        ->getResult();
     }
-    */
+
+     /**
+     * get all posts
+     *
+     * @return array
+     */
+    public function findAllPosts()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT a
+         FROM App:Programme a   
+      
+         ORDER BY a.id DESC'
+            )
+            ->getArrayResult();
+    }
+    
+
+    public function findEntitiesByString($str){
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT p
+                FROM App:Programme p
+                WHERE p.titre LIKE :str OR p.difficulte LIKE :str OR p.id LIKE :str  OR p.affiche LIKE :str OR p.type LIKE :str  OR p.description LIKE :str'
+            )
+            ->setParameter('str', '%'.$str.'%')
+            ->getResult();
+    }
+    
 }

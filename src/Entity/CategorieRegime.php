@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 use App\Repository\CategorieRegimeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CategorieRegimeRepository::class)
@@ -16,23 +18,44 @@ class CategorieRegime
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("catRegime")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="libelle est obligatoire !")
+     *  *  * @Assert\Length(
+     *      min = 10,
+     *      max = 30,
+     *      minMessage = "Minimum {{ limit }} caractéres",
+     *      maxMessage = "Maximum {{ limit }} caractéres"
+     * )
+     * @Groups("catRegime")
      */
     private $libelle;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="donner la déscription !")
+     *  *  * @Assert\Length(
+     *      min = 10,
+     *      minMessage = "Minimum {{ limit }} caractéres"
+     * )
+     * @Groups("catRegime")
      */
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity=Regime::class, mappedBy="categorieRegime")
+     * @ORM\OneToMany(targetEntity=Regime::class, mappedBy="categorieRegime",orphanRemoval=true)
+     * @Groups("catRegime")
      */
     private $regimes;
+
+    /**
+     * @ORM\Column(type="string", length=7, nullable=true)
+     */
+    private $statcolor;
 
     public function __construct()
     {
@@ -47,6 +70,11 @@ class CategorieRegime
     public function getLibelle(): ?string
     {
         return $this->libelle;
+    }
+
+    public function __toString()
+    {
+        return(string)$this->getLibelle();
     }
 
     public function setLibelle(?string $libelle): self
@@ -94,6 +122,18 @@ class CategorieRegime
                 $regime->setCategorieRegime(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatcolor(): ?string
+    {
+        return $this->statcolor;
+    }
+
+    public function setStatcolor(?string $statcolor): self
+    {
+        $this->statcolor = $statcolor;
 
         return $this;
     }

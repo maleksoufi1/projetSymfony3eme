@@ -24,7 +24,7 @@
         </thead>
         <tbody>
 {% for client in clients %}
-{% if client.role == "Client"  or client.role == "Client_Bloque" %}
+{% if client.role == "client"  or client.role == "bloque" %}
 <tr>
 <td> {{client.nom}} </td>
 <td> {{client.prenom}}  </td>
@@ -41,12 +41,12 @@
 </form>
 </td>
 <td>
-{% if client.role == "Client"%}
+{% if client.role == "client"%}
 <form method="post" onclick="window.location.href='/bloqueclient/{{client.email}}'"onsubmit="return confirm('Are you sure you want to delete this item?');">
     <button class="btn-danger">BLoque </button>
 </form>
 {% endif %}
-{% if client.role == "Client_Bloque"%}
+{% if client.role == "bloque"%}
 <form method="post" onclick="window.location.href='/debloqueclient/{{client.email}}'"onsubmit="return confirm('Are you sure you want to delete this item?');">
     <button class="btn-danger">debloque </button>
 </form>
@@ -60,7 +60,6 @@
       {% endif %}
         {% endfor %}
         </tbody> </table>
-     {{ knp_pagination_render(clients) }}
     
 
 

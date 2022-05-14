@@ -1,0 +1,117 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}CategorieProduit index{% endblock %}
+
+{% block body %}
+    <h1>CategorieProduit </h1>
+
+    <h2>chercher dynamiquement !!</h2>
+
+    <div class="sidebar-search">
+
+        <div class="input-group custom-search-form">
+
+            <input type="text" id="search" class="form-control" placeholder="Search here">
+        </div>
+        <!-- /input-group -->
+    </div>
+    <ul class="nav" id="side-menu">
+        <li>
+            <a href="#"> <span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level" id="entitiesNav">
+            </ul>
+        </li>
+    </ul><br><br><br><br>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            var searchRequest = null;
+            $("#search").keyup(function() {
+                var minlength = 1;
+                var that = this;
+                var value = $(this).val();
+                var entitySelector = $("#entitiesNav").html('');
+                if (value.length >= minlength ) {
+                    if (searchRequest != null)
+                        searchRequest.abort();
+                    searchRequest = $.ajax({
+                        type: "GET",
+                        url: "{{ path('searchProduit') }}",
+                        data: {
+                            'q' : value
+                        },
+                        dataType: "text",
+                        success: function(msg){
+                            //we need to check if the value is the same
+                            if (value===$(that).val()) {
+                                var result = JSON.parse(msg);
+                                $.each(result, function(key, arr) {
+                                    $.each(arr, function(id, value) {
+                                        if (key === 'posts') {
+                                            if (id !== 'error') {
+                                                console.log(value[1]);
+                                                console.log(value[0]);
+                                                entitySelector.append(' <div class="row"> <div class="col-lg-8 p-0"><div class="blog-item"> <div class="bi-pic"> <img src="public/picture/'+value[0]+'"></div> <div class="bi-text">  <h5><a href="#">'+value[1]+'</a></h5> <p><a  style="border-radius: 50% 20% / 10% 40%;background: #f36100;float: right;" class="p-1 mb-1  text-white " href="/categorie_produit_show/'+id+'"> Détails </a> </p></div> </div>');                                                // entitySelector.append(' <div class="row"> <div class="col-lg-8 p-0"><div class="blog-item"> <div class="bi-pic"> <img src="/uploads/images/'+value[0]+'"></div> <div class="bi-text">  <h5><a href="#">'+value[1]+'</a></h5> <p><a  style="border-radius: 50% 20% / 10% 40%;background: #f36100;float: right;" class="p-1 mb-1  text-white " href="/detailRegime/'+id+'"> Détails </a> </p></div> </div>');
+                                            } else {
+                                                entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                            }
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>Description</th>
+
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie_produit in categorie_produits %}
+            <tr>
+                <td>{{ categorie_produit.id }}</td>
+                <td>{{ categorie_produit.libelle }}</td>
+                <td>{{ categorie_produit.description }}</td>
+                <td><img src="{{ asset('picture/' ~ categorie_produit.image) }}" alt="" width="90" height="90" ></td>
+
+                <td>
+                    <a class="btn btn-light" href="{{ path('categorie_produit_show', {'id': categorie_produit.id}) }}">show</a>
+                    <a class="btn btn-warning" href="{{ path('categorie_produit_edit', {'id': categorie_produit.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('categorie_produit_new') }}">Create new</a>
+
+
+{% endblock %}

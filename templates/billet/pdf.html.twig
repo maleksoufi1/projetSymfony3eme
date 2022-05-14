@@ -1,0 +1,29 @@
+
+
+
+{% block body %}
+<h1 align ="center">Billet Pour l'EVENT</h1><hr>
+
+
+<table class="table">
+<thead> 
+<tr>
+<th> Id</th>
+<th> Catégorie événement </th>
+<th> Prix</th>
+<th> Description</th>
+<th> Horraire</th>
+
+</tr>
+</thead>
+
+<td>{{billets.id}}</td>
+<td>{{billets.evenement}}</td>
+<td>{{billets.numero}}DT</td>
+<td>{{billets.detail}}</td>
+<td>{{billets.horaire | date("m/d/Y")}}</td>
+
+</tr >
+</table>
+
+{% endblock %}

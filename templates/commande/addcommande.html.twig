@@ -1,0 +1,14 @@
+
+
+
+{% extends 'base-back.html.twig' %}
+
+{% block title %}New Produit{% endblock %}
+
+{% block body %}
+    <h1>Create new Commande</h1>
+
+    {{ form(formAddcommande) }}
+
+    <a href="{{ path('listproduits') }}">back to list</a>
+{% endblock %}

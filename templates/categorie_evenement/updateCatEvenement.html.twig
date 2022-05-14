@@ -1,0 +1,33 @@
+{% extends 'base-back.html.twig' %}
+{% block body %}
+
+{{form_start(formUpdateCatEvenement,{'attr':{'novalidate': 'novalidate'}})}}
+<h1> Modifier une Catégorie </h1>
+<table>
+<tr>
+<td>{{form_errors(formUpdateCatEvenement.libelle)}}</td>
+</tr>
+<tr>
+<td>{{form_label(formUpdateCatEvenement.libelle, "Libelle")}}</td>
+</tr>
+<tr>
+<td>{{form_widget(formUpdateCatEvenement.libelle)}}</td>
+</tr>
+<br>
+<tr>
+<td>{{form_errors(formUpdateCatEvenement.description)}}</td>
+</tr>
+<tr>
+<td>{{form_label(formUpdateCatEvenement.description, "Description")}}</td>
+</tr>
+<tr>
+<td>{{form_widget(formUpdateCatEvenement.description)}}</td>
+</tr>
+
+</table>
+
+
+
+{{form_end(formUpdateCatEvenement)}}
+{% endblock %}
+

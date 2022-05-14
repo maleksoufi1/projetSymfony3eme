@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\ProgrammeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -20,50 +21,82 @@ class Programme
     private $id;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $titre;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $description;
-
+    public function __toString()
+    {
+        return(string)$this->getTitre();
+    }
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $type;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $affiche;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $difficulte;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $duree;
 
     
     /**
-     * @ORM\OneToMany(targetEntity=SuiviProgramme::class, mappedBy="programme")
+     * @Assert\NotBlank
+     * @ORM\OneToMany(targetEntity=SuiviProgramme::class, mappedBy="programme", cascade={"persist", "remove"})
      */
     private $suivisProgrammes;
 
     /**
+     * @Assert\NotBlank
      * @ORM\ManyToOne(targetEntity=CategorieProgramme::class, inversedBy="programmes")
      */
     private $categorieProgramme;
 
     /**
+     * @Assert\NotBlank
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="programmes")
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
+
+    /**
+     * @ORM\Column(type="integer",nullable=true)
+     */
+    private $jaime;
+
+    /**
+     * @ORM\Column(type="integer",nullable=true)
+     */
+    private $jaimepas;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $abn;
 
     public function __construct()
     {
@@ -199,6 +232,54 @@ class Programme
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getJaime(): ?int
+    {
+        return $this->jaime;
+    }
+
+    public function setJaime(int $jaime): self
+    {
+        $this->jaime = $jaime;
+
+        return $this;
+    }
+
+    public function getJaimepas(): ?int
+    {
+        return $this->jaimepas;
+    }
+
+    public function setJaimepas(int $jaimepas): self
+    {
+        $this->jaimepas = $jaimepas;
+
+        return $this;
+    }
+
+    public function getAbn(): ?int
+    {
+        return $this->abn;
+    }
+
+    public function setAbn(?int $abn): self
+    {
+        $this->abn = $abn;
 
         return $this;
     }

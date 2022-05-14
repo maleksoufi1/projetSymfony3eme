@@ -1,0 +1,50 @@
+{% extends 'base-back.html.twig' %}
+{% block body %}
+{{form_start(formUpdateBillet)}}
+<h1> Modifier Billet </h1>
+<table>
+<tr>
+<td>{{form_errors(formUpdateBillet.numero)}}</td>
+</tr>
+<tr>
+<td>{{form_label(formUpdateBillet.numero, "Prix")}}</td>
+</tr>
+<tr>
+<td>{{form_widget(formUpdateBillet.numero)}}</td>
+</tr>
+<br>
+<tr>
+<td>{{form_errors(formUpdateBillet.detail)}}</td>
+</tr>
+<tr>
+<td>{{form_label(formUpdateBillet.detail, "Detail")}}</td>
+</tr>
+<tr>
+<td>{{form_widget(formUpdateBillet.detail)}}</td>
+</tr>
+<br>
+<tr>
+<td>{{form_errors(formUpdateBillet.horaire)}}</td>
+</tr>
+<tr>
+<td>{{form_label(formUpdateBillet.horaire, "Horaire")}}</td>
+</tr>
+<tr>
+<td>{{form_widget(formUpdateBillet.horaire)}}</td>
+</tr>
+<br>
+<tr>
+<td>{{form_errors(formUpdateBillet.evenement)}}</td>
+</tr>
+<tr>
+<td>{{form_label(formUpdateBillet.evenement, "Evenement")}}</td>
+</tr>
+<tr>
+<td>{{form_widget(formUpdateBillet.evenement)}}</td>
+</tr>
+</table>
+
+
+
+{{form_end(formUpdateBillet)}}
+{% endblock %}

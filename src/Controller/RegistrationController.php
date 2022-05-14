@@ -33,6 +33,8 @@ use App\Security\LoginFormAuthentificatorAuthenticator;
 use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+
+
 class RegistrationController extends AbstractController
 {
     /**
@@ -47,7 +49,7 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
           
             $user->setRoles(["ROLE_CLIENT"]);
-            $user->setRole("Client");
+            $user->setRole("client");
             // encode the plain password
             $user->setPassword(
             $userPasswordEncoder->encodePassword(

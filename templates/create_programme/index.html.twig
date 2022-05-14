@@ -1,0 +1,50 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}CreateProgramme index{% endblock %}
+
+{% block body %}
+    <h1>Liste Des Programmes Crées</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Lundi</th>
+                <th>Mardi</th>
+                <th>Mercredi</th>
+                <th>Jeudi</th>
+                <th>Vendredi</th>
+                <th>Samedi</th>
+                <th>Dimanche</th>
+                <th>Conseils</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for create_programme in create_programmes %}
+            <tr>
+                <td>{{ create_programme.id }}</td>
+                <td>{{ create_programme.lundi }}</td>
+                <td>{{ create_programme.mardi }}</td>
+                <td>{{ create_programme.mercredi }}</td>
+                <td>{{ create_programme.jeudi }}</td>
+                <td>{{ create_programme.vendredi }}</td>
+                <td>{{ create_programme.samedi }}</td>
+                <td>{{ create_programme.dimanche }}</td>
+                <td>{{ create_programme.conseils }}</td>
+                <td>
+                   <a  style="border: 50% 20% / 10% 40%;background: #f75100;float: right;" class="p-1 mb-1  text-white " href="{{ path('create_programme_imprimer', {'id': create_programme.id}) }}">imprimer</a>
+
+                    <a  style="border: 50% 20% / 10% 40%;background:#FF0000;float: right;" class="p-1 mb-1  text-white " href="{{ path('create_programme_edit', {'id': create_programme.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+  <a  style="border: 50% 20% / 10% 40%;background: #000000;float: right;" class="p-1 mb-1  text-white " href="{{ path('create_programme_new') }}">Create new</a>
+{% endblock %}

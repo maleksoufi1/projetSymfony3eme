@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class SecurityController extends AbstractController
 {
     /**
@@ -23,10 +23,10 @@ class SecurityController extends AbstractController
 
             return $this->redirectToRoute('listProgramme'); 
         }
-        else if ($this->IsGranted('ROLE_NUTRISTIONNISTE') )
+        else if ($this->IsGranted('ROLE_NUTRIONNISTE') )
         {
 
-            return $this->redirectToRoute('listRegime'); 
+            return $this->redirectToRoute('listRegimes'); 
         
         }
         else if ($this->IsGranted('ROLE_BLOQUE') )
@@ -38,7 +38,7 @@ class SecurityController extends AbstractController
         else if ($this->IsGranted('ROLE_ADMIN') )
         {
 
-            return $this->redirectToRoute('client'); 
+            return $this->redirectToRoute('listCoach'); 
         
         }
        

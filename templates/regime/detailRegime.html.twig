@@ -1,0 +1,129 @@
+{% extends 'base-front.html.twig' %}
+{% block title %}A domifit | Détails Régime{% endblock %}
+{% block body %}
+   <!-- Blog Details Hero Section Begin -->
+    <section class="blog-details-hero set-bg" data-setbg="/front-office/img/blog/reg.jpg">\front-office\img\blog
+        <div class="container">
+            <div class="row">
+            
+                <div class="col-lg-8 p-0 m-auto">
+                    <div class="bh-text">
+                    
+                        <h3>Détail de régime {{regime.type}}</h3>
+                        <ul>
+                            <li>Régime publier par le nutritionniste {{regime.user.nom}}{{regime.user.prenom}}</li>
+                            <li>{{regime.createdAt | date("m/d/Y")}}</li>
+                            <li>{{regime.categorieRegime.libelle}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Details Hero Section End -->
+
+    <!-- Blog Details Section Begin -->
+    <section class="blog-details-section spad">
+        <div class="container">
+            <div class="row">
+          
+                <div class="col-lg-8 p-0 m-auto">
+                    <div class="blog-details-text">
+                        <div class="blog-details-title">
+                            <p>
+                            
+                            <h5>{{regime.type}}</h5>
+
+                            <p>
+                               Catégorie de ce régime : {{regime.categorieRegime.libelle}} <br>
+                              {{regime.categorieRegime.description}} <br>
+                               {{regime.description}} <br>
+                            
+
+                            </p>
+                        </div>
+                      
+                     
+                      
+                        <div class="blog-details-tag-share">
+                            <div class="tags">
+                                <a href="#"> Difficulté : {{regime.dificulte}} </a>
+                                <a href="#"> Prix : {{regime.prix}} </a>
+                                <a href="#"> Durré : {{regime.prix}} </a>
+                             
+                            </div>
+                            <div class="share">
+                              
+                                    <a href="{{ path( 'addsuiviRegimeDirect' , {'id':regime.id} )}}" onclick="return confirm('voulez vous acheter ce pack de regime {{regime.type}} !')"
+                             style="border-radius: 50% 20% / 10% 40%;background: #f36100;text-white " class="p-3 mb-6">Acheter</a>
+                            </div>
+                        </div>
+                        <div class="blog-details-author">
+                            <div class="ba-pic">
+                                <img src="/front-office/img/blog/details/blog-profile.jpg" alt="">
+                            </div>
+                            <div class="ba-text">
+                                <h5>{{ regime.user.nom }} {{ regime.user.prenom }}</h5>
+                               <div class="row gx-3">
+                                    <div class="col">
+                                         <div class="p-2  text-white "> Email : </div>
+                                    </div>
+                                     <div class="col">
+                                         <div class="p-2  text-white">{{ regime.user.email }} </div>
+                                     </div>
+                                </div>
+
+
+                                 <div class="row gx-4">
+                                    <div class="col">
+                                         <div class="p-2  text-white "> Niveau : </div>
+                                    </div>
+                                     <div class="col">
+                                         <div class="p-2  text-white">{{ regime.user.niveau  }} </div>
+                                     </div>
+                                </div>
+
+
+                                 <div class="row gx-3">
+                                    <div class="col">
+                                         <div class="p-2  text-white "> Experiance : </div>
+                                    </div>
+                                     <div class="col">
+                                         <div class="p-2  text-white">Pro</div>
+                                     </div>
+                                </div>
+
+                                 <div class="row gx-3">
+                                 <div class="blog-details-quote">
+                            <div class="quote-icon">
+                                <img src="/front-office/img/blog/details/quote-left.png" alt="">
+                            </div>
+                           <div class="p-2  text-white">Pro pro </div>
+                        </div>
+                                  
+                                        
+                                    
+                                </div>
+
+                                <div class="bp-social">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-youtube-play"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                   
+                    </div>
+                </div>
+                  
+            </div>
+
+
+
+            <!-- -->
+              
+        </div>
+    </section>
+{% endblock %}

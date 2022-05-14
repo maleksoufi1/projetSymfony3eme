@@ -47,4 +47,32 @@ class CategorieProduitRepository extends ServiceEntityRepository
         ;
     }
     */
+    /**
+     * get all posts
+     *
+     * @return array
+     */
+    public function findAllPosts()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT a
+         FROM App:CategorieProduit a   
+      
+         ORDER BY a.id DESC'
+            )
+            ->getArrayResult();
+    }
+
+
+    public function findEntitiesByString($str){
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT p
+                FROM App:CategorieProduit p
+                WHERE p.libelle LIKE :str OR p.description LIKE :str'
+            )
+            ->setParameter('str', '%'.$str.'%')
+            ->getResult();
+    }
 }

@@ -6,7 +6,7 @@ use App\Repository\ProduitRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=ProduitRepository::class)
  */
@@ -26,19 +26,25 @@ class Produit
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\NotBlank
      */
     private $prix;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank
      */
     private $image;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank
      */
     private $description;
-
+    public function __toString()
+    {
+        return(string)$this->getNom();
+    }
     /**
      * @ORM\ManyToOne(targetEntity=CategorieProduit::class, inversedBy="produits")
      */
@@ -48,6 +54,20 @@ class Produit
      * @ORM\ManyToMany(targetEntity=Commande::class, mappedBy="produits")
      */
     private $commandes;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $jaime;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $jaimepas;
+
+
+
+
 
     public function __construct()
     {
@@ -145,4 +165,30 @@ class Produit
 
         return $this;
     }
+
+    public function getJaime(): ?int
+    {
+        return $this->jaime;
+    }
+
+    public function setJaime(int $jaime): self
+    {
+        $this->jaime = $jaime;
+
+        return $this;
+    }
+
+    public function getJaimepas(): ?int
+    {
+        return $this->jaimepas;
+    }
+
+    public function setJaimepas(int $jaimepas): self
+    {
+        $this->jaimepas = $jaimepas;
+
+        return $this;
+    }
+
+
 }

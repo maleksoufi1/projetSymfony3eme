@@ -18,6 +18,8 @@ use Symfony\Component\Form\FormError;
 
 use App\Form\ResetPasswordType;
 
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+
 
 class ProfilController extends AbstractController
 {

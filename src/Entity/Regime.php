@@ -2,10 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\RegimeRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\RegimeRepository;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=RegimeRepository::class)
@@ -16,21 +20,34 @@ class Regime
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("regime")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="donner type de régime !")
+     *  * @Assert\Length(
+     *      min = 10,
+     *      max = 30,
+     *      minMessage = "Minimum {{ limit }} caractéres",
+     *      maxMessage = "Maximum {{ limit }} caractéres"
+     * )
+     * @Groups("regime")
      */
     private $type;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="donner description de régime !")
+     * @Groups("regime")
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="donner dificulte de régime !")
+     * @Groups("regime")
      */
     private $dificulte;
 
@@ -38,21 +55,48 @@ class Regime
 
     /**
      * @ORM\OneToMany(targetEntity=SuiviRegime::class, mappedBy="regime")
+     * @Groups("regime")
      */
     private $suivisRegimes;
 
     /**
      * @ORM\ManyToOne(targetEntity=CategorieRegime::class, inversedBy="regimes")
+     * @Assert\NotBlank(message="selectionner catégeorie de régime !")
+     * @Groups("regime")
      */
     private $categorieRegime;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="regimes")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="regimes", cascade={"persist", "remove"})
+     * @Groups("regime")
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="l'image de régime !")
+     * @Groups("regime")
+     */
+    
+    private $image;
+
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     * @Groups("regime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     * @Assert\NotBlank(message="le prix de régime !")
+     * @Assert\Positive(message="le prix doit etre > 0 !")
+     * @Groups("regime")
+     */
+    private $prix;
+
     public function __construct()
     {
+        $this->setCreatedAt(new \DateTimeImmutable());
         $this->suivisRegimes = new ArrayCollection();
     }
 
@@ -71,6 +115,10 @@ class Regime
         $this->type = $type;
 
         return $this;
+    }
+    public function __toString()
+    {
+        return(string)$this->getType();
     }
 
     public function getDescription(): ?string
@@ -148,6 +196,42 @@ class Regime
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(?float $prix): self
+    {
+        $this->prix = $prix;
 
         return $this;
     }

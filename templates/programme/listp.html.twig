@@ -1,0 +1,46 @@
+
+
+
+{% block body %}
+<h1 align = "center"> Liste des programmes </h1>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>titre</th>
+                <th>Description</th>
+                <th>type</th>
+                <th>affiche</th>
+                <th>difficulte</th>
+               
+                <th>coach</th>
+                <th>categorie_programme</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for programme in programmes %}
+            <tr>
+            
+
+                <td>{{ programme.id }}</td>
+                <td>{{ programme.titre }}</td>
+                <td>{{ programme.description }}</td>
+                <td>{{ programme.type }}</td>
+                <td>{{ programme.affiche }}</td>
+                <td>{{ programme.difficulte }}</td>
+                
+               
+                <td>{{ programme.user}}</td>
+                <td>{{ programme.categorieProgramme }}</td>
+                
+               
+            </tr>
+       
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}
+
+   

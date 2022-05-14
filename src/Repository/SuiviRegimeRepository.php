@@ -47,4 +47,27 @@ class SuiviRegimeRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+    public function findSuiviByIdUser($user_id){
+
+        return $this->createQueryBuilder('s')
+        ->Where('s.user =:user')
+        ->setParameter('user',$user_id)
+        ->getQuery()
+        ->getResult();
+    }
+    public function findListSuivisByIdRegime($regime_id){
+
+        return $this->createQueryBuilder('s')
+        ->Where('s.regime =:regime')
+        ->setParameter('regime',$regime_id)
+        ->getQuery()
+        ->getResult();
+    }
+   
+    
+   
+
+   
 }

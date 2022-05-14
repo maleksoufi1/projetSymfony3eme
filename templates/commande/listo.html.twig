@@ -1,0 +1,34 @@
+{% block content %}
+    <div class="content">
+    <div class="container-fluid">
+    <div class="row">
+    <div class="col-md-12">
+    <div class="card">
+    <div class="card-header card-header-primary">
+        <h1 align="center">Commandes</h1>
+        <h4 align="center"> List Des Commandes </h4>
+    </div>
+    <div class="card-body">
+    <div class="table-responsive">
+    <table class="table" border="3">
+        <thead class=" text-primary">
+        <tr>
+            <th>Id</th>
+            <th>etat</th>
+            <th>prixTotal</th>
+            <th>user</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            <tr>
+                <td>{{ commande.id }}</td>
+                <td>{{ commande.etat }}</td>
+                <td>{{ commande.prixTotal }}</td>
+                <td>{{ commande.user }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

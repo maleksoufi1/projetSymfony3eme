@@ -1,0 +1,25 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}A domifit | SuiviRégime{% endblock %}
+{% block body %}
+    {% block errorExist %}
+        <section class="section-404">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-404">
+
+                            <img src="/front-office/img/finger.gif" alt="">
+                            <h3>Mr/Mme  ! Votre formulaire a été envoye avec succes , un programme est en cours de traitment </h3>
+                            <p>vous recevez votre programme dans 48h au plus tard</p>
+
+                            <a href="{{ path( 'accueil' )}}"><i class="fa fa-home"></i>Page d'Accueil</a> <br>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    {% endblock %}
+{% endblock %}

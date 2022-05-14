@@ -1,0 +1,47 @@
+{% extends 'base-back.html.twig' %}
+{% block body %}
+
+{{form_start(formUpdateEvenement,{'attr':{'novalidate': 'novalidate'}})}}
+<h1> Modifier Evenement </h1>
+<table>
+<tr>
+<td>{{form_errors(formUpdateEvenement.titre)}}</td>
+</tr>
+<tr>
+<td>{{form_label(formUpdateEvenement.titre, "Titre")}}</td>
+</tr>
+<tr>
+<td>{{form_widget(formUpdateEvenement.titre)}}</td>
+</tr>
+<br>
+<tr>
+<td>{{form_errors(formUpdateEvenement.description)}}</td>
+</tr>
+<tr>
+<td>{{form_label(formUpdateEvenement.description, "Description")}}</td>
+</tr>
+<tr>
+<td>{{form_widget(formUpdateEvenement.description)}}</td>
+</tr>
+<br>
+<tr>
+<td>{{form_errors(formUpdateEvenement.categorieEvenement)}}</td>
+</tr>
+<tr>
+<td>{{form_label(formUpdateEvenement.categorieEvenement, "CategorieEvenement")}}</td>
+</tr>
+<tr>
+<td>{{form_widget(formUpdateEvenement.categorieEvenement)}}</td>
+</tr>
+
+</table>
+
+
+
+{{form_end(formUpdateEvenement)}}
+{% endblock %}
+
+
+
+
+

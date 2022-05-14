@@ -1,0 +1,13 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Edit CategorieProgramme{% endblock %}
+
+{% block body %}
+    <h1>Edit CategorieProgramme</h1>
+
+    {{ include('categorie_programme/_form.html.twig', {'button_label': 'Update'}) }}
+
+  <a  style="border : 50% 20% / 10% 40%;background: #f36100;float: right;" class="p-1 mb-1  text-white " href="{{ path('categorie_programme_index') }}">back to list</a>
+
+    {{ include('categorie_programme/_delete_form.html.twig') }}
+{% endblock %}

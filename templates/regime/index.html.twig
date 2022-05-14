@@ -25,93 +25,115 @@
     <!-- Blog Section Begin -->
     <section class="blog-section spad">
         <div class="container">
+           <h3 class="text-white">Rechercher <h3>
+           <div class="sidebar-search">
+
+                <div class="input-group custom-search-form">
+
+                    <input type="text" id="search" class="form-control" placeholder="Search here">
+                </div>
+              
+            </div>
+            <ul class="nav" id="side-menu">
+                <li>
+                   
+                    <ul class="nav nav-second-level" id="entitiesNav">
+                    </ul>
+                </li>
+            </ul><br><br><br><br>
+
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+            <script type="text/javascript">
+                jQuery(document).ready(function() {
+                    var searchRequest = null;
+                    $("#search").keyup(function() {
+                        var minlength = 1;
+                        var that = this;
+                        var value = $(this).val();
+                        var entitySelector = $("#entitiesNav").html('');
+                        if (value.length >= minlength ) {
+                            if (searchRequest != null)
+                                searchRequest.abort();
+                            searchRequest = $.ajax({
+                                type: "GET",
+                                url: "{{ path('searchRegime') }}",
+                                data: {
+                                    'q' : value
+                                },
+                                dataType: "text",
+                                success: function(msg){
+                                    //we need to check if the value is the same
+                                    if (value===$(that).val()) {
+                                        var result = JSON.parse(msg);
+                                        $.each(result, function(key, arr) {
+                                            $.each(arr, function(id, value) {
+                                                if (key === 'posts') {
+                                                    if (id !== 'error') {
+                                                        console.log(value[1]);
+ entitySelector.append(' <div class="row"> <div class="col-lg-8 p-0"><div class="blog-item"> <div class="bi-pic"> <img src="/uploads/images/'+value[0]+'"></div> <div class="bi-text">  <h5><a href="#">'+value[1]+'</a></h5> <p><a  style="border-radius: 50% 20% / 10% 40%;background: #f36100;float: right;" class="p-1 mb-1  text-white " href="/detailRegime/'+id+'"> Détails </a> </p></div> </div>');
+                             } else {
+                                                        entitySelector.append('<li class="errorLi text-white">'+value+'</li>');
+                                                    }
+                                                }
+                                            });
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
+            </script>
+
+
+
+            
+            
+            
+            
+            
+            <br>
             <div class="row">
                 <div class="col-lg-8 p-0">
+
+                  {% for reg in regimes %}
                     <div class="blog-item">
                         <div class="bi-pic">
-                            <img src="front-office/img/blog/blog-1.jpg" alt="">
+                            <img  src="{{asset('uploads/images/' ~  reg.image )}}" alt="">
                         </div>
                         <div class="bi-text">
-                            <h5><a href="./blog-details.html">Vegan White Peach Mug Cobbler With Cardam Vegan White Peach Mug
-                                    Cobbler...</a></h5>
+                            <h5><a href="#">{{reg.type}}</a></h5>
                             <ul>
-                                <li>by Admin</li>
-                                <li>Aug,15, 2019</li>
-                                <li>20 Comment</li>
+                                <li>Nutritionniste  : {{reg.user}}</li>
+                                <li>Publier le : {{reg.createdAt | date("m/d/Y")}}</li>
+                                <li>Prix : {{reg.prix}}</li>
                             </ul>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua accumsan lacus facilisis.</p>
+                            <p>
+                            {{reg.description}}
+                               
+                                 
+                                <a  style="border-radius: 50% 20% / 10% 40%;background: #f36100;float: right;" class="p-1 mb-1  text-white "
+                                 href="{{ path( 'detailRegime' , {'id':reg.id} )}}"> Détails </a> 
+                            </p>
+                                
+                             
+                            
                         </div>
+                      
+                       
                     </div>
-                    <div class="blog-item">
-                        <div class="bi-pic">
-                            <img src="front-office/img/blog/blog-2.jpg" alt="">
-                        </div>
-                        <div class="bi-text">
-                            <h5><a href="./blog-details.html">Vegan White Peach Mug Cobbler With Cardam Vegan White Peach Mug
-                                    Cobbler...</a></h5>
-                            <ul>
-                                <li>by Admin</li>
-                                <li>Aug,15, 2019</li>
-                                <li>20 Comment</li>
-                            </ul>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua accumsan lacus facilisis.</p>
-                        </div>
-                    </div>
-                    <div class="blog-item">
-                        <div class="bi-pic">
-                            <img src="front-office/img/blog/blog-3.jpg" alt="">
-                        </div>
-                        <div class="bi-text">
-                            <h5><a href="./blog-details.html">Vegan White Peach Mug Cobbler With Cardam Vegan White Peach Mug
-                                    Cobbler...</a></h5>
-                            <ul>
-                                <li>by Admin</li>
-                                <li>Aug,15, 2019</li>
-                                <li>20 Comment</li>
-                            </ul>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua accumsan lacus facilisis.</p>
-                        </div>
-                    </div>
-                    <div class="blog-item">
-                        <div class="bi-pic">
-                            <img src="front-office/img/blog/blog-4.jpg" alt="">
-                        </div>
-                        <div class="bi-text">
-                            <h5><a href="./blog-details.html">Vegan White Peach Mug Cobbler With Cardam Vegan White Peach Mug
-                                    Cobbler...</a></h5>
-                            <ul>
-                                <li>by Admin</li>
-                                <li>Aug,15, 2019</li>
-                                <li>20 Comment</li>
-                            </ul>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua accumsan lacus facilisis.</p>
-                        </div>
-                    </div>
-                    <div class="blog-item">
-                        <div class="bi-pic">
-                            <img src="front-office/img/blog/blog-5.jpg" alt="">
-                        </div>
-                        <div class="bi-text">
-                            <h5><a href="./blog-details.html">Vegan White Peach Mug Cobbler With Cardam Vegan White Peach Mug
-                                    Cobbler...</a></h5>
-                            <ul>
-                                <li>by Admin</li>
-                                <li>Aug,15, 2019</li>
-                                <li>20 Comment</li>
-                            </ul>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua accumsan lacus facilisis.</p>
-                        </div>
-                    </div>
+                     {% endfor %}
+
+
+                    <!-- -->
+                
+                  
+                   
                     <div class="blog-pagination">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">Next</a>
+                    <div class="navigation">
+                    {{ knp_pagination_render(regimes) }}
+                     </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-8 p-0">
@@ -119,14 +141,15 @@
                         <div class="so-categories">
                             <h5 class="title">Categories</h5>
                             <ul>
-                                <li><a href="#">Yoga <span>12</span></a></li>
-                                <li><a href="#">Runing <span>32</span></a></li>
-                                <li><a href="#">Weightloss <span>86</span></a></li>
-                                <li><a href="#">Cario <span>25</span></a></li>
-                                <li><a href="#">Body buiding <span>36</span></a></li>
-                                <li><a href="#">Nutrition <span>15</span></a></li>
+                            {% for cat in Catregimes %}
+                                <li><a href="#"> {{ cat.libelle }}<span>12</span></a></li>
+                                 {% endfor %}
+                     
                             </ul>
+                            
                         </div>
+
+
                         <div class="so-latest">
                             <h5 class="title">Feature posts</h5>
                             <div class="latest-large set-bg" data-setbg="front-office/img/letest-blog/latest-1.jpg">

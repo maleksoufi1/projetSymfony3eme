@@ -1,0 +1,101 @@
+
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Ajouter SuivisRégime{% endblock %}
+
+{% block body %}
+{% block sidebar %}
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-light navbar-light">
+                 
+
+
+
+                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                    <img src="/back-office/img/logoa.png"  style="width: 100px; height: 100px;"  alt="">
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="position-relative">
+                        <img class="rounded-circle" src="/back-office/img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0">Jhon Doe</h6>
+                        <span>Nutritionniste</span>
+                    </div>
+                </div>
+                <div class="navbar-nav w-100">
+
+                    <a href="/profil" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Profil</a>
+                    
+                    <a href="/statRegime" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Statistiques</a>
+                          <a href="/listRegimes" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Mes Regimes</a>
+                                  <a href="/listCatRegime" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Catégories Regimes</a>
+                         
+                           <a href="/listsuiviRegimes" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Liste suivisRégime</a>
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+         {% endblock %}
+
+    <h1>Ajouter SuivisRégime</h1>
+
+   
+
+
+    {{ form_start(formAddsuivisRegime,{'attr': {'novalidate': 'novalidate'}} ) }}
+<table>
+{# titre #}
+<tr>
+    <td>{{form_label(formAddsuivisRegime.titre , "Titre de suivis")}}</td>
+    <td>{{form_widget(formAddsuivisRegime.titre)}}</td>
+</tr>
+<tr>
+    <td class="text-danger">{{form_errors(formAddsuivisRegime.titre )}}</td>
+    <td></td>
+</tr>
+{# type #}
+<tr>
+    <td>{{form_label(formAddsuivisRegime.note , "Note de suivis")}}</td>
+    <td>{{form_widget(formAddsuivisRegime.note)}}</td>
+</tr>
+<tr>
+    <td class="text-danger">{{form_errors(formAddsuivisRegime.note )}}</td>
+    <td></td>
+</tr>
+{# remarque #}
+<tr>
+    <td>{{form_label(formAddsuivisRegime.remarque , "remarque de suivis")}}</td>
+    <td>{{form_widget(formAddsuivisRegime.remarque)}}  </td>
+</tr>
+<tr>
+    <td class="text-danger">{{form_errors(formAddsuivisRegime.remarque )}} </td>
+    <td></td>
+</tr>
+{# regime #}
+<tr>
+    <td>{{form_label(formAddsuivisRegime.regime , "régime de suivis")}}</td>
+    <td>{{form_widget(formAddsuivisRegime.regime)}}</td>
+</tr>
+<tr>
+    <td class="text-danger">{{form_errors(formAddsuivisRegime.regime )}} </td>
+    <td></td>
+</tr>
+
+{# categorieRegime #}
+<tr>
+    <td>{{form_label(formAddsuivisRegime.user , "Client de ce suivis")}}</td>
+    <td>{{form_widget(formAddsuivisRegime.user)}}</td>
+</tr>
+<tr>
+    <td>{{form_errors(formAddsuivisRegime.user )}}</td>
+    <td></td>
+</tr>
+
+
+</table>
+{{form_row(formAddsuivisRegime.save,{'label':'Ajouter'})}}
+{{form_end(formAddsuivisRegime)}}
+{% endblock %}
+

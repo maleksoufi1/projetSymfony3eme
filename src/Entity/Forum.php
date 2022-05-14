@@ -6,6 +6,7 @@ use App\Repository\ForumRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ForumRepository::class)
@@ -21,11 +22,13 @@ class Forum
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="Titre is required")
      */
     private $titre;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * *@Assert\NotBlank(message="Nbr de participant is required")
      */
     private $nbrParticipant;
 
@@ -69,7 +72,7 @@ class Forum
     }
 
     /**
-     * @return Collection|commentaire[]
+     *@return Collection|commentaire[]
      */
     public function getCommentaires(): Collection
     {

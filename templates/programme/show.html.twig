@@ -1,0 +1,92 @@
+{% extends 'base-back.html.twig' %}
+
+
+
+{% block title %}A domifit | Programme{% endblock %}
+
+{% block body %}
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="/front-office/img/blog/sport2.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 p-0 m-auto">
+                    <div class="bh-text">
+                        <h3>Qui que vous soyez,nous avons LE programme sportif qu'il vous faut !</h3>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+
+    <!-- Blog Section Begin -->
+   
+    <section class="blog-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 p-8">
+                
+                
+                    <div class="blog-item">
+                        <div class="bi-pic">
+                            <td><img src="{{ asset('picture/' ~ programmes.image) }}" alt="" width="90" height="90"</td>
+                        </div>
+                        <div class="bi-text">
+                        <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+                        
+                            <h5><a> {{  programmes.titre }} </a> </h5>
+                            <ul>
+                                <li>{{ programmes.id }}</li>
+                                <li>Aug,15, 2019</li>
+                                <li>25 Comment</li>
+                            
+                            </ul>
+                             
+                         <p>Views : {{ programmes.abn }} </p>
+                         <p>- {{ programmes.type }}</p>
+                         <p>- {{ programmes.affiche }}</p>
+                         <p>- {{ programmes.description }}</p>
+                          
+                           
+                            
+
+ <div class="bs-text">
+ 
+ 
+                  <a  style="border : 50% 20% / 10% 40%;background: #f45200;float: right;" class="p-1 mb-1  text-white "
+                              href="{{ path('deleteProgramme',{'id':programmes.id} )}}">Delete</a>
+
+                  <a  style="border : 50% 20% / 10% 40%;background: #f45200;float: right;" class="p-1 mb-1  text-white " 
+                              href="{{ path('listProgramme') }}">back to list</a>
+
+                  <a  style="border : 50% 20% / 10% 40%;background: #f45200;float: right;" class="p-1 mb-1  text-white "
+                              href="{{ path('updateProgramme',{'id':programmes.id} )}}">Update</a>
+
+                              
+                   
+
+
+
+                        </div>
+                    </div>
+                    
+                    
+
+                   
+                   
+                      
+                           
+    
+
+
+    <!-- Get In Touch Section Begin -->
+  
+{% endblock %}
+
+  

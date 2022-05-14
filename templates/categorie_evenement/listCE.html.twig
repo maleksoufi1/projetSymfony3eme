@@ -1,0 +1,37 @@
+{% extends 'base-back.html.twig' %}
+
+
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+
+<table class="table">
+<thead>
+<tr>
+<th> id</th>
+<th> Image</th>
+<th> libelle</th>
+<th> Description</th>
+
+</tr>
+</thead>
+
+<tr {% for c in categories%}>
+<td>{{c.id}}</td>
+
+<td><img src="{{asset('uploads/images/' ~  c.image )}}" alt="" style="width:5px:height:5px"></td>
+
+<td>{{c.libelle}}</td>
+<td>{{c.description}}</td>
+
+<td><a href="{{ path( 'updateCatEvenement' , {'id':c.id} )}}"> Update </a> </td>
+<td><a href="{{ path( 'deleteCatEvenement' , {'id':c.id} )}}"> delete </a> </td>
+</tr {% endfor %}>
+<td><a href="{{ path( 'addCatEvenement'  )}}"> Create New </a> </td>
+</table>
+
+{% endblock %}

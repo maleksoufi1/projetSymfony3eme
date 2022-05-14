@@ -1,4 +1,4 @@
-{% extends 'baseDataTable.html.twig' %}
+{% extends 'base2stat.html.twig' %}
 
 {% block title %}Statistiques{% endblock %}
 
@@ -44,7 +44,7 @@
       <div class="col-12 col-md-6 col-lg-6">
         <div class="card ">
           <div class="card-header mb-3">
-            <h3 style="color: #035EFF;" class="mt-3 ml-4 ">Appels d'offres</h3> </div>
+            <h3 style="color: #035EFF;" class="mt-3 ml-4 ">Users statistique</h3> </div>
           <div class="card-body px-5 py-5">
             <canvas id="myChart2"></canvas>
           </div>
@@ -53,7 +53,7 @@
       <div class="col-12 col-md-6 col-lg-6">
         <div class="card">
           <div class="card-header mb-3">
-            <h3 style="color: #035EFF;" class="mt-3 ml-4 ">Taches</h3> </div>
+            <h3 style="color: #035EFF;" class="mt-3 ml-4 "> Trache d'age</h3> </div>
           <div class="card-body px-5 py-5">
             <canvas id="myChart4"></canvas>
           </div>
@@ -81,6 +81,24 @@
 
 
 {% endblock %}
+{% set  h = 0 %}
+{% set  f = 0  %}
+{% set  autre = 0  %}
+{% set total = 0 %}
+{% for user in users %} 
+ {% set total = 1 + total  %}
+ {% if user.sexe == "Homme" %}
+ {% set h = 1 + h  %}
+{% elseif user.sexe  == "Femme"  %}
+ {% set f = 1 + f  %}
+
+{% elseif user.sexe  == "Autre"  %}
+{% set autre = 1 + autre  %}
+ {% endif %}
+{% endfor %}
+{% set totalh = (h /total ) * 100 %}
+{% set totalf =  (f /total ) * 100 %}
+{% set totala =  ( autre /total ) * 100 %}
 {% set  client = 0 %}
 {% set  coach = 0  %}
 {% set  nut = 0 %}
@@ -101,7 +119,7 @@
         var myChart = new Chart(ctx, {
           type: 'bar',
           data: {
-            labels: ["Client", "Coach", "Nutritionniste"],
+            labels: ["client", "coach", "Nutritionniste"],
             datasets: [{
               label: 'Nombre',
               data: [ {{client}}, {{coach}}, {{nut}}],
@@ -136,8 +154,24 @@
           }
         });
 
+        var ctx = document.getElementById("myChart4").getContext('2d');
+        var myChart = new Chart(ctx, {
+          type: 'pie',
+          data: {
+            datasets: [{
+              data: [ {{totalh}},{{totalf}}, {{totala}}],
+              backgroundColor: ['#FD9D15', '#31DE8D', '#FF4914' ],
+              label: 'Dataset 1'
+            }],
+
+            labels: ['Homme % ', 'Femme % ', 'Autre %'],
+          },
+          options: {
+            responsive: true,
+            legend: {
+              position: 'bottom',
+            },
+          }
+        });
         </script>
-        <script src="{{ asset('assets/js/chart.min.jss') }} "></script> 
-
-
-{% endblock %}
+        {% endblock %}

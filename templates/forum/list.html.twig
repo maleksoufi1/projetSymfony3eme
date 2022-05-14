@@ -1,6 +1,6 @@
-{% extends 'base-back.html.twig' %}
+{% extends 'base-back2.html.twig' %}
 
-{% block title %}Hello AgentController!{% endblock %}
+{% block title %}liste forum{% endblock %}
 
 {% block body %}
 <style>
@@ -8,13 +8,22 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<h1> liste forum
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Asus/Downloads/adomifit (1)/adomifit/src/Controller/AgentController.php'|file_link(0) }}">src/Controller/AgentController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Asus/Downloads/adomifit (1)/adomifit/templates/agent/index.html.twig'|file_link(0) }}">templates/agent/index.html.twig</a></code></li>
-    </ul>
-</div>
+</h1>
+
+<table border=5>
+{%for f in forums%}
+<tr>
+
+<td> {{f.titre}}  </td>
+<td> {{f.nbrParticipant}}  </td>
+
+
+<td><a href="{{path('deleteForum',{'id':f.id})}}" > delete </a> </td>
+<td><a href="{{path('modifierForum',{'id':f.id})}}" > modifier </a> </td>
+
+</tr>
+{% endfor %}
+</table>
 {% endblock %}

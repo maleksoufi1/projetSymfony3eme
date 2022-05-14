@@ -326,7 +326,7 @@
                                 searchRequest.abort();
                             searchRequest = $.ajax({
                                 type: "GET",
-                                url: "{{ path('search') }}",
+                                url: "{{ path('searchU') }}",
                                 data: {
                                     'q' : value
                                 },
@@ -340,9 +340,9 @@
                                                 if (key === 'posts') {
                                                     if (id !== 'error') {
                                                         console.log(value[1]);
-                                                        entitySelector.append('<li><b>'+value[1]+'</b><a href="/detailedpost/'+id+'">'+'<img src="/uploads/post/'+value[0]+'" style="width: 50px; height: 50px"/>'+'</a></li>');
+                                                        entitySelector.append('<div class="text-white"><li><b>'+value[0]+'</b><b>'+value[1]+'</b></li></di>');
                                                     } else {
-                                                        entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                                        entitySelector.append('<div class="text-white"><li class="errorLi">'+value+'</li></di>');
                                                     }
                                                 }
                                             });

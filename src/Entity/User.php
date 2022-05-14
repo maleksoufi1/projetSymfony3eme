@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
@@ -24,42 +25,47 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("user")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("user")
     * @Assert\Regex(
     * pattern = "/^[a-z]+$/i",
     * htmlPattern = "[a-zA-Z]+"
     * )
-    * )            I
+    * )            
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("user")
         * @Assert\Regex(
         *        pattern     = "/^[a-z]+$/i",
         *        htmlPattern = "[a-zA-Z]+"
         * )
-        * )            I 
+        * )            
        */
     private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255, unique=true, nullable=true)
+     * @Groups("user")
      */
     private $email;
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string", length=255)
-     */
+        * @ORM\Column(type="string", length=255)
+       * @Groups("user")
+        */
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $role;
 
@@ -67,7 +73,7 @@ class User implements UserInterface
      * @ORM\Column(type="json")
      */
     private $roles = [];
-  /**
+     /**
      * A visual identifier that represents this user.
      *
      * @see UserInterface
@@ -96,7 +102,7 @@ class User implements UserInterface
 
 
     /**
-     * @ORM\Column(type="string", length=255 , nullable=true )
+     * @ORM\Column(type="string", length=255 , nullable=true)
      * @var string
      */
     private $photo;
@@ -108,6 +114,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="integer", length=255, nullable=true)
+      * @Groups("user")
      * @Assert\Type(
         *        type     = "integer",
         *           message ="The value {{valuer}  is not a valide type {{type}}.}"
@@ -122,6 +129,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="integer", length=255, nullable=true)
+    * @Groups("user")
      * @Assert\Type(
         *        type     = "integer",
         *           message ="The value {{valuer}  is not a valide type {{type}}.}"
@@ -134,6 +142,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+    * @Groups("user")
      */
     private $sexe;
 
@@ -173,7 +182,7 @@ class User implements UserInterface
      */
     private $commandes;
    /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true, nullable=true)
      * @var Datetime
      */
     private $updateAt;
@@ -436,7 +445,10 @@ class User implements UserInterface
 
         return $this;
     }
-
+    public function __toString()
+    {
+        return(string)$this->getNom();
+    }
     public function removeProgramme(Programme $programme): self
     {
         if ($this->programmes->removeElement($programme)) {
@@ -517,9 +529,9 @@ class User implements UserInterface
         return $this->commandes;
     }
 
-    public function getUpdateAt(): ?\DateTimeInterface
+    public function getUpdateAtt(): ?\DateTimeInterface
     {
-        return $this->updateAtt;
+        return $this->updateAt;
     }
 
     public function setUpdateAt(?\DateTimeInterface $updateAtt): self

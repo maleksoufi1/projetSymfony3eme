@@ -19,6 +19,7 @@ class ProduitRepository extends ServiceEntityRepository
         parent::__construct($registry, Produit::class);
     }
 
+
     // /**
     //  * @return Produit[] Returns an array of Produit objects
     //  */
@@ -47,4 +48,14 @@ class ProduitRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findProgrammesByCat($categorie_produit_id ){
+
+        return $this->createQueryBuilder('p')
+            ->Where('p.categorieProduit =:categorieProduit')
+            ->setParameter('categorieProduit',$categorie_produit_id)
+            ->getQuery()
+            ->getResult();
+    }
+
+
 }

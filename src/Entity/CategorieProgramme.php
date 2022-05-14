@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\CategorieProgrammeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -20,20 +20,41 @@ class CategorieProgramme
     private $id;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $libelle;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $description;
 
     /**
+     * @Assert\NotBlank
      * @ORM\OneToMany(targetEntity=Programme::class, mappedBy="categorieProgramme")
      */
     private $programmes;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $jaime;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $jaimepas;
+    public function __toString()
+    {
+        return(string)$this->getLibelle();
+    }
     public function __construct()
     {
         $this->programmes = new ArrayCollection();
@@ -94,6 +115,42 @@ class CategorieProgramme
                 $programme->setCategorieProgramme(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getJaime(): ?int
+    {
+        return $this->jaime;
+    }
+
+    public function setJaime(?int $jaime): self
+    {
+        $this->jaime = $jaime;
+
+        return $this;
+    }
+
+    public function getJaimepas(): ?int
+    {
+        return $this->jaimepas;
+    }
+
+    public function setJaimepas(?int $jaimepas): self
+    {
+        $this->jaimepas = $jaimepas;
 
         return $this;
     }

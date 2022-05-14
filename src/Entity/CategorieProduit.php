@@ -6,6 +6,7 @@ use App\Repository\CategorieProduitRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CategorieProduitRepository::class)
@@ -21,18 +22,28 @@ class CategorieProduit
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank
      */
     private $libelle;
-
+    public function __toString()
+    {
+        return(string)$this->getLibelle();
+    }
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank
      */
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="categorieProduit")
+     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="categorieProduit",orphanRemoval=true)
      */
     private $produits;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
 
     public function __construct()
     {
@@ -94,6 +105,18 @@ class CategorieProduit
                 $produit->setCategorieProduit(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

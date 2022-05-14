@@ -1,0 +1,235 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}A domifit | Régime{% endblock %}
+
+{% block body %}
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="front-office/img/blog/details/details-hero.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 p-0 m-auto">
+                    <div class="bh-text">
+                        <h3>Workout nutrition explained. What to eat before, during, and after exercise.</h3>
+                        <ul>
+                            <li>by Admin</li>
+                            <li>Aug,15, 2019</li>
+                            <li>20 Comment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Blog Section Begin -->
+    <section class="blog-section spad">
+        <div class="container">
+           <h3 class="text-white">Rechercher <h3>
+           <div class="sidebar-search">
+
+                <div class="input-group custom-search-form">
+
+                    <input type="text" id="search" class="form-control" placeholder="Search here">
+                </div>
+              
+            </div>
+            <ul class="nav" id="side-menu">
+                <li>
+                   
+                    <ul class="nav nav-second-level" id="entitiesNav">
+                    </ul>
+                </li>
+            </ul><br><br><br><br>
+
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+            </script>
+
+            <script type="text/javascript">
+                jQuery(document).ready(function() {
+                    var searchRequest = null;
+                    $("#search").keyup(function() {
+                        var minlength = 1;
+                        var that = this;
+                        var value = $(this).val();
+                        var entitySelector = $("#entitiesNav").html('');
+                        if (value.length >= minlength ) {
+                            if (searchRequest != null)
+                                searchRequest.abort();
+                            searchRequest = $.ajax({
+                                type: "GET",
+                                url: "{{ path('searchRegime') }}",
+                                data: {
+                                    'q' : value
+                                },
+                                dataType: "text",
+                                success: function(msg){
+                                    //we need to check if the value is the same
+                                    if (value===$(that).val()) {
+                                        var result = JSON.parse(msg);
+                                        $.each(result, function(key, arr) {
+                                            $.each(arr, function(id, value) {
+                                                if (key === 'posts') {
+                                                    if (id !== 'error') {
+                                                        console.log(value[1]);
+ entitySelector.append('<div class="container"> <div class="row"> <div class="col-lg-8 p-0"><div class="blog-item"> <div class="bi-pic"> <img src="/uploads/images/'+value[0]+'"></div> <div class="bi-text">  <h5><a href="#">'+value[1]+'</a></h5> <p><a  style="border-radius: 50% 20% / 10% 40%;background: #f36100;float: right;" class="p-1 mb-1  text-white " href="/detailRegime/'+id+'"> Détails </a> </p></div></div> </div> </div>');
+                             } else {
+                                                        entitySelector.append('<li class="errorLi text-white">'+value+'</li>');
+                                                    }
+                                                }
+                                            });
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
+            </script>
+
+
+
+            
+            
+            
+            
+            
+       
+             <div class="row">
+             <div class="d-flex justify-content-end text-white "style="background: transparent;" >
+                    {{knp_pagination_sortable(regimes, 'Prix','r.prix')}}
+            </div>
+           
+             </div>
+            <div class="row">
+           
+                <div class="col-lg-8 p-0">
+
+                  {% for reg in regimes %}
+                    <div class="blog-item">
+                        <div class="bi-pic">
+                            <img  src="{{asset('uploads/images/' ~  reg.image )}}" alt="">
+                        </div>
+                        <div class="bi-text">
+                            <h5><a href="#">{{reg.type}}</a></h5>
+                            <ul>
+                                <li>Nutritionniste  : {{reg.user}}</li>
+                                <li>Publier le : {{reg.createdAt | date("m/d/Y")}}</li>
+                                <li>Prix : {{reg.prix}}</li>
+                            </ul>
+                            <p>
+                            {{reg.description}}
+                               
+                                 
+                                <a  style="border-radius: 50% 20% / 10% 40%;background: #f36100;float: right;" class="p-1 mb-1  text-white "
+                                 href="{{ path( 'detailRegime' , {'id':reg.id} )}}"> Détails </a> 
+                            </p>
+                                
+                             
+                            
+                        </div>
+                      
+                       
+                    </div>
+                     {% endfor %}
+
+
+                    <!-- -->
+                
+                  
+                   
+                    <div class="blog-pagination">
+                    <div class="navigation">
+                    {{ knp_pagination_render(regimes) }}
+                     </div>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-4 col-md-8 p-0" >
+                    <div class="sidebar-option">
+                        <div class="so-categories" style ="display: block; position: sticky; top:20px;">
+                            <h5 class="title">Categories</h5>
+                            <ul>
+                          
+                                 <div class="filtrer" >
+                                  {% include 'regime/FormFiltrer.html.twig' with {form: form , min: min , max: max} only  %}
+                                 </div>
+                                
+                
+                            </ul>
+                            
+                        </div>
+
+                        <!-- 
+                        <div class="so-latest">
+                            <h5 class="title">Feature posts</h5>
+                            <div class="latest-large set-bg" data-setbg="front-office/img/letest-blog/latest-1.jpg">
+                                <div class="ll-text">
+                                    <h5><a href="./blog-details.html">This Japanese Way of Making Iced Coffee Is a Game...</a></h5>
+                                    <ul>
+                                        <li>Aug 20, 2019</li>
+                                        <li>20 Comment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="latest-item">
+                                <div class="li-pic">
+                                    <img src="front-office/img/letest-blog/latest-2.jpg" alt="">
+                                </div>
+                                <div class="li-text">
+                                    <h6><a href="./blog-details.html">Grilled Potato and Green Bean Salad</a></h6>
+                                    <span class="li-time">Aug 15, 2019</span>
+                                </div>
+                            </div>
+                            <div class="latest-item">
+                                <div class="li-pic">
+                                    <img src="front-office/img/letest-blog/latest-3.jpg" alt="">
+                                </div>
+                                <div class="li-text">
+                                    <h6><a href="./blog-details.html">The $8 French Rosé I Buy in Bulk Every Summer</a></h6>
+                                    <span class="li-time">Aug 15, 2019</span>
+                                </div>
+                            </div>
+                            <div class="latest-item">
+                                <div class="li-pic">
+                                    <img src="front-office/img/letest-blog/latest-4.jpg" alt="">
+                                </div>
+                                <div class="li-text">
+                                    <h6><a href="./blog-details.html">Ina Garten's Skillet-Roasted Lemon Chicken</a></h6>
+                                    <span class="li-time">Aug 15, 2019</span>
+                                </div>
+                            </div>
+                            <div class="latest-item">
+                                <div class="li-pic">
+                                    <img src="front-office/img/letest-blog/latest-5.jpg" alt="">
+                                </div>
+                                <div class="li-text">
+                                    <h6><a href="./blog-details.html">The Best Weeknight Baked Potatoes, 3 Creative Ways</a></h6>
+                                    <span class="li-time">Aug 15, 2019</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="so-tags">
+                            <h5 class="title">Popular tags</h5>
+                            <a href="#">Gyming</a>
+                            <a href="#">Body buidling</a>
+                            <a href="#">Yoga</a>
+                            <a href="#">Weightloss</a>
+                            <a href="#">Proffeponal</a>
+                            <a href="#">Streching</a>
+                            <a href="#">Cardio</a>
+                            <a href="#">Karate</a>
+                        </div>
+                        -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->
+
+    <!-- Get In Touch Section Begin -->
+
+  
+{% endblock %}

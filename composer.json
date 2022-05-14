@@ -8,11 +8,15 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "captcha-com/symfony-captcha-bundle": "4.*",
+        "cmen/google-charts-bundle": "^5.0",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.5",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.11",
+        "dompdf/dompdf": "^1.2",
         "knplabs/knp-paginator-bundle": "^5.8",
+        "knpuniversity/oauth2-client-bundle": "^2.10",
+        "league/oauth2-google": "^4.0",
         "phpdocumentor/reflection-docblock": "^5.3",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "4.4.*",
@@ -44,6 +48,7 @@
         "symfonycasts/verify-email-bundle": "^1.9",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
+        "twilio/sdk": "^6.35",
         "vich/uploader-bundle": "^1.19"
     },
     "require-dev": {

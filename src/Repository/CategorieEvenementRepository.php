@@ -19,6 +19,24 @@ class CategorieEvenementRepository extends ServiceEntityRepository
         parent::__construct($registry, CategorieEvenement::class);
     }
 
+    public function findEntitiesByString($str){
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT c
+                FROM APP\Entity\CategorieEvenement c
+                WHERE c.libelle LIKE :str'
+            )
+            ->setParameter('str', '%'.$str.'%')
+            ->getResult();
+    }
+
+
+    
+
+
+
+
+
     // /**
     //  * @return CategorieEvenement[] Returns an array of CategorieEvenement objects
     //  */

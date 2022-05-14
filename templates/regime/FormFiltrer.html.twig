@@ -1,0 +1,70 @@
+{{form_start(form, {attr: {class: 'filter'}}) }}
+
+
+  {{ form_row(form.q) }}
+
+  <div>
+ 
+  <div class="text-white h6">  {{ form_row(form.categories) }}</div>
+  </div>
+
+  <div>
+  <div class="text-white h4">{{form_label(form.min , "Prix :")}}</div>
+  <div class="row">
+    <div class="col-md-6">
+      {{ form_row(form.min) }}
+    </div>
+    <div class="col-md-6">
+      {{ form_row(form.max) }}
+    </div>
+  </div>
+  <div id="slider" data-min="{{ min }}" data-max="{{ max }}"  style="margin-bottom: 3rem;"></div>
+  
+  <script>
+
+var slider = document.getElementById('slider');
+const range = noUiSlider.create(slider, {
+    start: [ min.value || parseInt(slider.dataset.min ,10), max.value || parseInt(slider.dataset.max ,10)],
+    connect: true,
+    range: {
+        'min': parseInt(slider.dataset.min ,10) ,
+        'max': parseInt(slider.dataset.max ,10) 
+    }
+})
+range.on('slide', function (values, handle) {
+ 
+        if (handle === 0) {
+            min.value = Math.round(values[0])
+        }
+        if (handle === 1) {
+            max.value = Math.round(values[1])
+        }
+    })
+
+ range.on('end', function (values, handle) {
+  
+        if (handle===0) {
+            min.dispatchEvent(new Event('change'))
+        } else {
+            max.dispatchEvent(new Event('change'))
+        }
+    })
+</script>
+  
+  </div>
+
+  
+  <div>
+  <div class="text-white h4">{{form_label(form.promo , "Promotion :")}}</div>
+  <div class="text-white h6">  {{ form_row(form.promo) }}</div>
+  </div>
+
+
+
+<button type="submit" class="btn w-100" style="  background-color:orange;">Filtrer</button>
+
+{{form_end(form)}}
+
+
+
+ 

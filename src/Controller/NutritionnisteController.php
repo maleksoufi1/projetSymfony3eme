@@ -13,6 +13,8 @@ use App\Entity\User;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+
 class NutritionnisteController extends AbstractController
 {
     /**
@@ -26,6 +28,7 @@ class NutritionnisteController extends AbstractController
     }
      /**
      * @Route("/listNutritionniste", name="listNutritionniste")
+      *  @IsGranted("ROLE_ADMIN") 
      */
     public function list(): Response
     {

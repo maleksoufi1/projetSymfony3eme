@@ -1,0 +1,13 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Edit CreateProgramme{% endblock %}
+
+{% block body %}
+    <h1>Edit CreateProgramme</h1>
+
+    {{ include('create_programme/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a  style="border : 50% 20% / 10% 40%;background: #f36100;float: right;" class="p-1 mb-1  text-white " href="{{ path('create_programme_index') }}">back to list</a>
+
+    {{ include('create_programme/_delete_form.html.twig') }}
+{% endblock %}

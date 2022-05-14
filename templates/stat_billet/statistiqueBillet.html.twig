@@ -1,0 +1,116 @@
+
+{% extends 'base2stat.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous">
+{% endblock %}
+
+{% block body %}
+
+      <div class="container-fluid mx-auto my-2 py-3">
+
+
+<!--=======================1=============================-->
+<div class="row mt-secnav mx-auto">
+  
+
+
+  <div class="col-md-12">
+  <div class="sticky">
+    <div class="secnav pl-4 mr-2  mb-3">
+      <div class="row ">
+      <div style="margin-top: 11px " class="col-12 col-md-10"><h5 class=" mb-3">Statistiques</h5></div>
+  
+  
+      <div class="col-12 col-md-2">
+      </div>
+  
+
+
+  </div>
+  
+  </div>
+  </div>
+
+  </br>
+
+
+<!--=================Chef departement===================-->
+
+
+  <div style="margin-left: 0px;" class="row mr-2 mt-5">
+
+      
+      <div class="col-12 col-md-6 col-lg-6">
+        <div class="card">
+          <div class="card-header mb-3">
+            <h3 style="color: #035EFF;" class="mt-3 ml-4 ">Billets</h3> </div>
+          <div class="card-body px-5 py-5">
+            <canvas id="myChart4"></canvas>
+          </div>
+        </div>
+      </div>
+
+  </div> 
+
+ 
+
+
+
+
+
+
+  </div>
+</div>
+
+
+
+
+          </div>
+       
+
+
+
+{% endblock %}
+{% set  billetA = 0 %}
+{% set  billetR = 0  %}
+
+{% for billet in billets %} 
+ {% set billetA = billetA + billet.quantite %}
+
+
+{% endfor %}
+
+{% for achatbillet in achatBillets %} 
+{% set billetR = billetR + achatbillet.quantite %}                
+
+
+{% endfor %}
+{% block javascripts %}
+<script>
+        var ctx = document.getElementById("myChart4").getContext('2d');
+        var myChart = new Chart(ctx, {
+          type: 'pie',
+          data: {
+            datasets: [{
+              data: [ {{billetA}},{{billetR}}],
+              backgroundColor: ['#FD9D15', '#31DE8D' ],
+              label: 'Dataset 1'
+            }],
+
+            labels: ['Billet Vendu', 'Billet Restant'],
+          },
+          options: {
+            responsive: true,
+            legend: {
+              position: 'bottom',
+            },
+          }
+        });
+        </script>
+        <script src="{{ asset('assets/js/chart.min.jss') }} "></script>
+
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base-back.html.twig' %}
+{% block body %}
+{{form_start(formAddBillet,{'attr':{'novalidate': 'novalidate'}})}}
+<h1> Ajouter Billet </h1>
+<table>
+
+<br>
+<tr>
+<td>{{form_errors(formAddBillet.detail)}}</td>
+</tr>
+<tr>
+<td>{{form_label(formAddBillet.detail, "Detail")}}</td>
+</tr>
+<tr>
+<td>{{form_widget(formAddBillet.detail)}}</td>
+</tr>
+<br>
+<tr>
+<td>{{form_errors(formAddBillet.horaire)}}</td>
+</tr>
+<tr>
+<td>{{form_label(formAddBillet.horaire, "Horaire")}}</td>
+</tr>
+<tr>
+<td>{{form_widget(formAddBillet.horaire)}}</td>
+</tr>
+<br>
+<tr>
+<td>{{form_errors(formAddBillet.evenement)}}</td>
+</tr>
+<tr>
+<td>{{form_label(formAddBillet.evenement, "Evenement")}}</td>
+</tr>
+<tr>
+<td>{{form_widget(formAddBillet.evenement)}}</td>
+</tr>
+</table>
+
+
+
+{{form_end(formAddBillet)}}
+
+
+
+{% endblock %}

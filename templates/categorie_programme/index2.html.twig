@@ -1,0 +1,239 @@
+
+
+{% extends 'base-front.html.twig' %}
+
+{% block title %}A domifit | Régime{% endblock %}
+
+{% block body %}
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="/front-office/img/breadcrumb-bg.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 p-0 m-auto">
+                    <div class="bh-text">
+                        <h3>Qui que vous soyez,nous avons LE programme sportif qu'il vous faut !</h3>
+                        <ul>
+                            <li>by Admin</li>
+                            <li>Aug,15, 2019</li>
+                            <li>20 Comment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+    <section class="choseus-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <span>YOU ARE THE BEST?</span>
+                        <h2>LISTE DES CategorieProgramme</h2>
+                        
+                    </div>
+                </div>
+            </div>
+
+
+    <!-- Blog Section Begin -->
+    {% for categorie_programme in categorie_programmes %}
+    <section class="blog-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-ld-8 p-0">
+                    <div class="blog-item">
+                        <div class="bi-pic">
+                            <td><img src="{{ asset('picture/' ~ categorie_programme.image) }}" alt="" width="90" height="90"</td>
+                        </div>
+                        <div class="bi-text">
+                         <div class="stars">
+            <i class="lar la-star" data-value="1"></i><i class="lar la-star" data-value="2"></i><i class="lar la-star" data-value="3"></i><i class="lar la-star" data-value="4"></i><i class="lar la-star" data-value="5"></i>
+        </div>
+        <input type="hidden" name="note" id="note" value="0">
+                            <div class="bi-text">
+                                <div class="stars">
+                                    <i class="lar la-star" data-value="1"></i><i class="lar la-star" data-value="2"></i><i class="lar la-star" data-value="3"></i><i class="lar la-star" data-value="4"></i><i class="lar la-star" data-value="5"></i>
+                                </div>
+                                <input type="hidden" name="note" id="note" value="0">
+                                <script src="js/scripts.js"></script>
+
+                            <h5><a><td>{{ categorie_programme.libelle }}</td></a></h5>
+                            
+                            <ul>
+                            
+                                <li{{ categorie_programme.id }}</li>
+                                <li>Aug,15, 2019</li>
+                                <li>20 Comment</li>
+                            </ul>
+                            <p>{{ categorie_programme.description }}</p>
+                            
+
+<a  style="border-radius: 50% 20% / 10% 40%;background: #f36100;float: right;" class="p-1 mb-1  text-white "
+                                 href="{{ path( 'listProgrammeF' , {'id':categorie_programme.id} , {'id':categorie_programme.libelle})}}"> liste des programmes </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                      
+                           
+    <!-- Blog Section End -->
+    <!-- Class Timetable Section Begin -->
+    <section class="class-timetable-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="section-title">
+                        <span>rejoindre un cours en ligne</span>
+    <h2>Find Your Time</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="table-controls">
+                        <ul>
+                            <li class="active" data-tsfilter="all">All event</li>
+                            <li data-tsfilter="fitness">Fitness tips</li>
+                            <li data-tsfilter="motivation">Motivation</li>
+                            <li data-tsfilter="workout">Workout</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="class-timetable">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Monday</th>
+                                    <th>Tuesday</th>
+                                    <th>Wednesday</th>
+                                    <th>Thursday</th>
+                                    <th>Friday</th>
+                                    <th>Saturday</th>
+                                    <th>Sunday</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="class-time">6.00am - 8.00am</td>
+                                    <td class="dark-bg hover-bg ts-meta" data-tsmeta="workout">
+                                        <h5>WEIGHT LOOSE</h5>
+                                        <span>RLefew D. Loee</span>
+                                    </td>
+                                    <td class="hover-bg ts-meta" data-tsmeta="fitness">
+                                        <h5>Cardio</h5>
+                                        <span>RLefew D. Loee</span>
+                                    </td>
+                                    <td class="dark-bg hover-bg ts-meta" data-tsmeta="workout">
+                                        <h5>Yoga</h5>
+                                        <span>Keaf Shen</span>
+                                    </td>
+                                    <td class="hover-bg ts-meta" data-tsmeta="fitness">
+                                        <h5>Fitness</h5>
+                                        <span>Kimberly Stone</span>
+                                    </td>
+                                    <td class="dark-bg blank-td"></td>
+                                    <td class="hover-bg ts-meta" data-tsmeta="motivation">
+                                        <h5>Boxing</h5>
+                                        <span>Rachel Adam</span>
+                                    </td>
+                                    <td class="dark-bg hover-bg ts-meta" data-tsmeta="workout">
+                                        <h5>Body Building</h5>
+                                        <span>Robert Cage</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="class-time">10.00am - 12.00am</td>
+                                    <td class="blank-td"></td>
+                                    <td class="dark-bg hover-bg ts-meta" data-tsmeta="fitness">
+                                        <h5>Fitness</h5>
+                                        <span>Kimberly Stone</span>
+                                    </td>
+                                    <td class="hover-bg ts-meta" data-tsmeta="workout">
+                                        <h5>WEIGHT LOOSE</h5>
+                                        <span>RLefew D. Loee</span>
+                                    </td>
+                                    <td class="dark-bg hover-bg ts-meta" data-tsmeta="motivation">
+                                        <h5>Cardio</h5>
+                                        <span>RLefew D. Loee</span>
+                                    </td>
+                                    <td class="hover-bg ts-meta" data-tsmeta="workout">
+                                        <h5>Body Building</h5>
+                                        <span>Robert Cage</span>
+                                    </td>
+                                    <td class="dark-bg hover-bg ts-meta" data-tsmeta="motivation">
+                                        <h5>Karate</h5>
+                                        <span>Donald Grey</span>
+                                    </td>
+                                    <td class="blank-td"></td>
+                                </tr>
+                                <tr>
+                                    <td class="class-time">5.00pm - 7.00pm</td>
+                                    <td class="dark-bg hover-bg ts-meta" data-tsmeta="fitness">
+                                        <h5>Boxing</h5>
+                                        <span>Rachel Adam</span>
+                                    </td>
+                                    <td class="hover-bg ts-meta" data-tsmeta="motivation">
+                                        <h5>Karate</h5>
+                                        <span>Donald Grey</span>
+                                    </td>
+                                    <td class="dark-bg hover-bg ts-meta" data-tsmeta="workout">
+                                        <h5>Body Building</h5>
+                                        <span>Robert Cage</span>
+                                    </td>
+                                    <td class="blank-td"></td>
+                                    <td class="dark-bg hover-bg ts-meta" data-tsmeta="workout">
+                                        <h5>Yoga</h5>
+                                        <span>Keaf Shen</span>
+                                    </td>
+                                    <td class="hover-bg ts-meta" data-tsmeta="motivation">
+                                        <h5>Cardio</h5>
+                                        <span>RLefew D. Loee</span>
+                                    </td>
+                                    <td class="dark-bg hover-bg ts-meta" data-tsmeta="fitness">
+                                        <h5>Fitness</h5>
+                                        <span>Kimberly Stone</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="class-time">7.00pm - 9.00pm</td>
+                                    <td class="hover-bg ts-meta" data-tsmeta="motivation">
+                                        <h5>Cardio</h5>
+                                        <span>RLefew D. Loee</span>
+                                    </td>
+                                    <td class="dark-bg blank-td"></td>
+                                    <td class="hover-bg ts-meta" data-tsmeta="fitness">
+                                        <h5>Boxing</h5>
+                                        <span>Rachel Adam</span>
+                                    </td>
+                                    <td class="dark-bg hover-bg ts-meta" data-tsmeta="workout">
+                                        <h5>Yoga</h5>
+                                        <span>Keaf Shen</span>
+                                    </td>
+                                    <td class="hover-bg ts-meta" data-tsmeta="motivation">
+                                        <h5>Karate</h5>
+                                        <span>Donald Grey</span>
+                                    </td>
+                                    <td class="dark-bg hover-bg ts-meta" data-tsmeta="fitness">
+                                        <h5>Boxing</h5>
+                                        <span>Rachel Adam</span>
+                                    </td>
+                                    <td class="hover-bg ts-meta" data-tsmeta="workout">
+                                        <h5>WEIGHT LOOSE</h5>
+                                        <span>RLefew D. Loee</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Class Timetable Section End -->
+
+
+    <!-- Get In Touch Section Begin -->
+  
+{% endblock %}

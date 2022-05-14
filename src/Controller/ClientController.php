@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Knp\Component\Pager\PaginatorInterface; 
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+
 class ClientController extends AbstractController
 {
     /**
@@ -34,13 +36,9 @@ class ClientController extends AbstractController
     {
         $rep=$this->getDoctrine()->getRepository(User::class);
 
-        $client =$rep-> findAll();
+        $clients =$rep-> findAll();
 
-        $clients = $paginator->paginate(
-            $client, // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            6 // Nombre de résultats par page
-        );
+     
         return $this->render('client/list.html.twig', [
             'clients' => $clients,
         ]);

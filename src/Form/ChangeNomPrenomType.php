@@ -26,7 +26,7 @@ class ChangeNomPrenomType extends AbstractType
             ->add('nom', TextType::class)
             ->add('prenom', TextType::class)
             ->add('email', TextType::class)
-            ->add('sexe', TextType::class)
+            ->add('tel', TextType::class)
         ;
     }
 

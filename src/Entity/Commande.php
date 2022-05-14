@@ -6,6 +6,7 @@ use App\Repository\CommandeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CommandeRepository::class)
@@ -21,11 +22,13 @@ class Commande
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\NotBlank
      */
     private $prixTotal;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank
      */
     private $etat;
 
@@ -110,5 +113,9 @@ class Commande
         $this->user = $user;
 
         return $this;
+    }
+    public function __toString()
+    {
+        return(string)$this->getEtat();
     }
 }

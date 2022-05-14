@@ -1,0 +1,25 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}A domifit | SuiviRégime{% endblock %}
+{% block body %}
+    {% block errorExist %}
+        <section class="section-404">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-404">
+
+                            <img src="/front-office/img/finger.gif" alt="">
+                            <h3>Mr/Mme  ! Votre message a été transmis, nous vous répondrons dans les meilleurs délais  </h3>
+                            <p>Merci pour votre interraction</p>
+
+                            <a href="{{ path( 'accueil' )}}"><i class="fa fa-home"></i>Page d'Accueil</a> <br>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,32 @@
+
+{% extends 'base-back.html.twig' %}
+{% block body %}
+{{form_start(formAddCatEvenement,{'attr':{'novalidate': 'novalidate'}})}}
+<h1> Ajouter une Catégorie </h1>
+<table>
+<tr>
+<td>{{form_errors(formAddCatEvenement.libelle)}}</td>
+</tr>
+<tr>
+<td>{{form_label(formAddCatEvenement.libelle, "Libelle")}}</td>
+</tr>
+<tr>
+<td>{{form_widget(formAddCatEvenement.libelle)}}</td>
+</tr>
+<br>
+<tr>
+<td>{{form_errors(formAddCatEvenement.description)}}</td>
+</tr>
+<tr>
+<td>{{form_label(formAddCatEvenement.description, "Description")}}</td>
+</tr>
+<tr>
+<td>{{form_widget(formAddCatEvenement.description)}}</td>
+</tr>
+
+</table>
+
+
+
+{{form_end(formAddCatEvenement)}}
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base-back.html.twig' %}
+{% block title %}suivi Programme {% endblock %}
+
+{% block body %}
+    <h1>Liste Suivis Programmes </h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+           
+
+                <th>Id</th>
+                <th>niveau/100</th>
+                <th>nombre_de_seances</th>
+                <th>remarque</th>
+                <th>programme</th>
+                <th>client</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        {% for suivi in suivisProgrammes %}
+            <tr>
+                <td>{{ suivi.id }}</td>
+                <td>{{ suivi.note }}</td>
+                <td>{{ suivi.getNombreDeSeances() }}</td>
+                <td>{{ suivi.remarque }}</td>
+                <td>{{ suivi.programme }}</td>
+                <td>{{ suivi.user }}</td>
+               
+                <td>
+                
+                    
+                    <a  style="border : 50% 20% / 10% 40%;background: #FF0000	;float: right;" class="p-1 mb-1  text-white " href="{{ path('deleteSuiviProg',{'id':suivi.id} )}}">Delete</a>
+                    <a  style="border : 50% 20% / 10% 40%;background: #f36100;float: right;" class="p-1 mb-1  text-white " href="{{ path('create_programme_new',{'id':suivi.user} )}}">CreateProgramme</a>
+                </td>
+            </tr>
+       
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

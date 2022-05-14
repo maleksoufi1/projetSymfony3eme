@@ -1,0 +1,63 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}CategorieProgramme index{% endblock %}
+
+{% block body %}
+
+    <h1>CategorieProgramme </h1>
+    {{ form_start(form) }}
+
+<div class="form-row align-items-end" >
+ <div class="col">
+   {{ form_row(form.nom) }}
+ </div>
+
+   <div class="col-lg-6 offset-lg-1">
+   <div class="form-group">
+   {{ form_row(form.nom) }}
+      <button type="submit" style="border : 50% 20% / 10% 40%;background: #000000	;float: left ;" class="btn btn-success ">Rechercher</button>
+    </div>
+ </div>
+</div>
+ {{ form_end(form) }}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>Description</th>
+                <th>image</th>
+                <th>rate</th>
+                <th> action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie_programme in categorie_programmes %}
+            <tr>
+                <td>{{ categorie_programme.id }}</td>
+                <td>{{ categorie_programme.libelle }}</td>
+                <td>{{ categorie_programme.description }}</td>
+                <td><img src="{{ asset('picture/' ~ categorie_programme.image) }}" alt="" width="90" height="90"</td>
+
+                <td>
+                  <a  style="border : 50% 20% / 10% 40%;background: #f36100;float: right;" class="p-1 mb-1  text-white " href="{{ path('categorie_programme_show', {'id': categorie_programme.id}) }}">show</a>
+                  <a  style="border : 50% 20% / 10% 40%;background: #FF0000	;float: right;" class="p-1 mb-1  text-white " href="{{ path('categorie_programme_edit', {'id': categorie_programme.id}) }}">edit</a>
+               <span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+                </td>
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   <a  style="border : 50% 20% / 10% 40%;background: #000000	;float: right;" class="p-1 mb-1  text-white " href="{{ path('categorie_programme_new') }}">Create new</a>
+{% endblock %}

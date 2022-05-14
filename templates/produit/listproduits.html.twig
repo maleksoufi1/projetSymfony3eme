@@ -1,0 +1,48 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Hello ClientController!{% endblock %}
+
+{% block body %}
+
+    <h1>Liste produits </h1>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+
+            <th>Id</th>
+            <th>nom</th>
+            <th>prix</th>
+            <th>image</th>
+            <th>description</th>
+            <th>categorie</th>
+            <th>Nb j'aime</th>
+            <th>Nb j'aime pas</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for produit in produits %}
+            <tr>
+                <td>{{ produit.id }}</td>
+                <td>{{ produit.nom }}</td>
+                <td>{{ produit.prix }}</td>
+                <td><img src="{{ asset('picture/' ~ produit.image) }}" alt="" width="90" height="90" "></td>
+                <td>{{ produit.description }}</td>
+                <td>{{ produit.categorieProduit }}</td>
+                <td>{{ produit.jaime }}</td>
+                <td>{{ produit.jaimepas }}</td>
+                <td>
+                    <a class="btn btn-warning" href="{{ path('updateproduit', {'id': produit.id}) }}">Update</a>
+                    <a class="btn btn-danger" href="{{ path('deleteproduit', {'id': produit.id}) }}">Delete</a>
+                    <a href="{{ path('stat', {'id': produit.id}) }}" class="btn btn-dark">stat</a>
+
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('addproduit') }}">Create new</a>
+    {{ knp_pagination_render(produits) }}
+{% endblock %}

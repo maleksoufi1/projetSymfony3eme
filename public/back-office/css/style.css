@@ -286,3 +286,6 @@
     background: var(--dark);
     border-color: var(--primary);
 }
+img {
+    border-radius: 50%;
+}

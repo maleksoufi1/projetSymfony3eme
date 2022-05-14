@@ -32,6 +32,7 @@ class RegistrationFormType extends AbstractType
         'choices' => [
             'Homme' => 'Homme',
             'Femme' => 'Femme',
+            'Autre' => 'Autre',
         ],       
         ])
         ->add('email')

@@ -1,0 +1,14 @@
+
+
+
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Update Produit{% endblock %}
+
+{% block body %}
+    <h1>Update Produit</h1>
+
+    {{ form(formUpdateproduit) }}
+
+    <a href="{{ path('listproduits') }}">back to list</a>
+{% endblock %}

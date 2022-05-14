@@ -8,13 +8,33 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Asus/Downloads/adomifit (1)/adomifit/src/Controller/AgentController.php'|file_link(0) }}">src/Controller/AgentController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Asus/Downloads/adomifit (1)/adomifit/templates/agent/index.html.twig'|file_link(0) }}">templates/agent/index.html.twig</a></code></li>
-    </ul>
-</div>
+<table class="table">
+<thead>
+<tr>
+<th> Id</th>
+<th> Catégorie événement </th>
+<th> Image </th>
+<th> Titre</th>
+<th> Description</th>
+<th> Horraire</th>
+<th> Longitude</th>
+<th> Latitude</th>
+</tr>
+</thead>
+<tr {% for e in evenements%}>
+<td>{{e.id}}</td>
+<td>{{e.categorieEvenement}}</td>
+<td><img src="{{asset('uploads/images/' ~  e.image )}}" alt="" style="width:40px:height:40px"></td>
+<td>{{e.titre}}</td>
+<td>{{e.description}}</td>
+<td>{{e.horraire| date("m/d/Y")}}</td>
+<td>{{e.longitude}}</td>
+<td>{{e.latitude}}</td>
+<td><a href="{{ path( 'deleteEvenement' , {'id':e.id} )}}"> Delete </a> </td>
+<td><a href="{{ path( 'updateEvenement' , {'id':e.id} )}}"> Update </a> </td>
+</tr {% endfor %}>
+<td><a href="{{ path( 'addEvenement'  )}}"> Create New </a> </td>
+</table>
+
 {% endblock %}

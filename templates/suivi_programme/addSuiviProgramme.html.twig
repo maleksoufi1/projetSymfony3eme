@@ -1,0 +1,105 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}A domifit | Programme{% endblock %}
+
+{% block body %}
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="/front-office/img/breadcrumb-bg.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 p-0 m-auto">
+                    <div class="bh-text">
+                        <h3>Qui que vous soyez,nous avons LE programme sportif qu'il vous faut !</h3>
+                        <ul>
+                            <li>by Admin</li>
+                            <li>Aug,15, 2019</li>
+                            <li>20 Comment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+<div class="">
+            <div class="">
+    
+    {% for message in app.flashes('notice') %}
+    <div class="alert alert-success">
+    {{message}}
+    </div>
+    {% endfor %}
+
+    <!-- Blog Section Begin -->
+
+ <div class="gettouch-section">
+ <h1 class="mt-2 mb-5 col-lg-6 offset-lg-3">Ajouter suivi programme</h1>
+        <div class="container">
+            <div class="row">
+
+
+
+    {{ form_start(formAddSuiviProgramme) }}
+   
+                
+ <h7 class="mt-2 mb-5 col-lg-5 offset-lg-3"> Votre Niveau</h7>
+    <div class="form_group toolbar">
+  
+  <input type="range" min="1" max="50" value="30" aria-label="Sélectionner la taille de la pointe du crayon" class="form_group mt-2 col-lg-6 offset-lg-3"><span class="output">100</span>
+  
+</div>
+               
+                <div class="form_group  mt-5 col-lg-6 offset-lg-3" >
+                    {{ form_label(formAddSuiviProgramme.note) }}
+                    {{ form_widget(formAddSuiviProgramme.note,{'attr':{'class':'form_control' }})}}
+                </div>
+
+                {{ form_start(formAddSuiviProgramme) }}
+                <div class="form_group  mt-5 col-lg-6 offset-lg-3">
+                    {{ form_label(formAddSuiviProgramme.remarque) }}
+                    {{ form_widget(formAddSuiviProgramme.remarque,{'attr':{'class':'form_control' }})}}
+                </div>
+
+                {{ form_start(formAddSuiviProgramme) }}
+                <div class="form_group mt-5 col-lg-6 offset-lg-3">
+                    {{ form_label(formAddSuiviProgramme.programme) }}
+                    {{ form_widget(formAddSuiviProgramme.programme,{'attr':{'class':'form_control' }})}}
+                </div>
+
+                 {{ form_start(formAddSuiviProgramme) }}
+                <div class="form_group mt-5 col-lg-6 offset-lg-3">
+                    {{ form_label(formAddSuiviProgramme.user) }}
+                    {{ form_widget(formAddSuiviProgramme.user,{'attr':{'class':'form_control' }})}}
+                </div>
+
+                 <div class="form_group  mt-5 col-lg-6 offset-lg-3" >
+                    {{ form_label(formAddSuiviProgramme.nombre_de_seances) }}
+                    {{ form_widget(formAddSuiviProgramme.nombre_de_seances,{'attr':{'class':'form_control' }})}}
+                </div>
+
+                
+
+
+
+
+
+                <div class="form_group">
+                    <button class ="btn btn-info mt-5 text-white col-lg-6 offset-lg-3 ">Submit</button>
+                </div>
+
+    {{ form_end(formAddSuiviProgramme) }}
+    </div>
+    </div>
+    </div>
+
+       </section>
+                      
+                           
+    
+
+
+    <!-- Get In Touch Section Begin -->
+  
+{% endblock %}
+
+

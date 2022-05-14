@@ -1,0 +1,58 @@
+{% extends 'base-back.html.twig' %}
+{% block body %}
+{{form_start(formAddEvenement,{'attr':{'novalidate': 'novalidate'}})}}
+<h1> Ajouter Evenement </h1>
+<table>
+<tr>
+<td>{{form_errors(formAddEvenement.titre)}}</td>
+</tr>
+<tr>
+<td>{{form_label(formAddEvenement.titre, "Titre")}}</td>
+</tr>
+<tr>
+<td>{{form_widget(formAddEvenement.titre)}}</td>
+</tr>
+<br>
+<tr>
+<td>{{form_errors(formAddEvenement.description)}}</td>
+</tr>
+<tr>
+<td>{{form_label(formAddEvenement.description, "Description")}}</td>
+</tr>
+<tr>
+<td>{{form_widget(formAddEvenement.description)}}</td>
+</tr>
+<br>
+<tr>
+<td>{{form_errors(formAddEvenement.categorieEvenement)}}</td>
+</tr>
+<tr>
+<td>{{form_label(formAddEvenement.categorieEvenement, "CategorieEvenement")}}</td>
+</tr>
+<tr>
+<td>{{form_widget(formAddEvenement.categorieEvenement)}}</td>
+</tr>
+<td>{{form_errors(formAddEvenement.longitude)}}</td>
+</tr>
+<tr>
+<td>{{form_label(formAddEvenement.longitude, "Longitude")}}</td>
+</tr>
+<tr>
+<td>{{form_widget(formAddEvenement.longitude)}}</td>
+</tr>
+</tr>
+<td>{{form_errors(formAddEvenement.latitude)}}</td>
+</tr>
+<tr>
+<td>{{form_label(formAddEvenement.latitude, "Latitude")}}</td>
+</tr>
+<tr>
+<td>{{form_widget(formAddEvenement.latitude)}}</td>
+</tr>
+
+</table>
+
+
+
+{{form_end(formAddEvenement)}}
+{% endblock %}

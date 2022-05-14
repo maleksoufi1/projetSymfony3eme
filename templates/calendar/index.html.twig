@@ -1,0 +1,124 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Calendar index{% endblock %}
+
+{% block body %}
+    <h1>Calendar index</h1>
+ 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Description</th>
+                <th>Allday</th>
+                <th>Background_color</th>
+                <th>Border_color</th>
+                <th>Text_color</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for calendar in calendars %}
+            <tr>
+                <td>{{ calendar.id }}</td>
+                <td>{{ calendar.title }}</td>
+                <td>{{ calendar.start ? calendar.start|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ calendar.end ? calendar.end|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ calendar.description }}</td>
+                <td>{{ calendar.allday ? 'Yes' : 'No' }}</td>
+                <td>{{ calendar.backgroundColor }}</td>
+                <td>{{ calendar.borderColor }}</td>
+                <td>{{ calendar.textColor }}</td>
+                <td>
+                    <a href="{{ path('calendar_show', {'id': calendar.id}) }}">show</a>
+                    <a href="{{ path('calendar_edit', {'id': calendar.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+   
+
+    <section class="hero-section">
+        <div class="hs-slider owl-carousel">
+            <div class="hs-item set-bg" data-setbg="/front-office/img/hero/hero-1.jpg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 offset-lg-6">
+                            <div class="hi-text">
+                                <span>Shape your body</span>
+                                <h1>Be <strong>strong</strong> traning hard</h1>
+                                <a href="#" class="primary-btn">Get info</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hs-item set-bg" data-setbg="/front-office/img/hero/hero-2.jpg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 offset-lg-6">
+                            <div class="hi-text">
+                                <span>Shape your body</span>
+                                <h1>Be <strong>strong</strong> traning hard</h1>
+                                <a href="#" class="primary-btn">Get info</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!---->
+  
+    <div id="calendrier" style ="width:80%; margin:auto;">
+
+
+</div>
+
+{% block javaScript %}
+
+<script>
+ 
+window.onload = () => {
+    let calendarElt = document.querySelector("#calendrier")
+
+    let calendar = new FullCalendar.Calendar(calendarElt ,{
+      initialView: 'dayGridMonth'  ,
+      locale : 'fr',
+      headerToolbar: {
+          start: 'prev,next today',
+          center: 'title',
+          end: 'dayGridMonth,timeGridWeek'
+      },
+      events:{{ data|raw}},
+      editable: true,
+      eventResizableFromStart: true
+    })
+    calendar.on('eventChange', (e) => {
+        console.log(e);
+    })
+    calendar.render()
+}
+</script>
+
+
+
+{% endblock %}
+
+
+
+
+    
+
+
+    <a href="{{ path('calendar_new') }}">Create new</a>
+{% endblock %}

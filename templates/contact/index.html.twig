@@ -1,0 +1,76 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}A domifit | Contact{% endblock %}
+{% block body %}
+
+    <!-- Contact Section Begin -->
+    <section class="contact-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="section-title contact-title">
+                        <span>Contact Us</span>
+                        <h2>GET IN TOUCH</h2>
+                    </div>
+                    <div class="contact-widget">
+                        <div class="cw-text">
+                            <i class="fa fa-map-marker"></i>
+                            <p>333 Middle Winchendon Rd, Rindge,<br/> NH 03461</p>
+                        </div>
+                        <div class="cw-text">
+                            <i class="fa fa-mobile"></i>
+                            <ul>
+                                <li>(+216) 73 456 789</li>
+                                <li>125-668-886</li>
+                            </ul>
+                        </div>
+                        <div class="cw-text email">
+                            <i class="fa fa-envelope"></i>
+                            <p>adomifit@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="leave-comment">
+                        {{ form_start(contactForm) }}
+   
+                
+ 
+
+               
+                <div class="form_group  mt-2 col-lg-6 offset-lg-3" >
+                <i class="fa fa-user"></i>
+                    {{ form_label(contactForm.nom) }}
+                    {{ form_widget(contactForm.nom,{'attr':{'class':'form_control' }})}}
+                </div>
+
+                
+                <div class="form_group  mt-2 col-lg-6 offset-lg-3">
+                <i class="fa fa-envelope"></i>
+                    {{ form_label(contactForm.email) }}
+                    {{ form_widget(contactForm.email,{'attr':{'class':'form_control' }})}}
+                </div>
+
+              
+                <div class="form_group mt-2 col-lg-6 offset-lg-3">
+                <i class="fa fa-envelope"></i>
+                    {{ form_label(contactForm.message) }}
+                    {{ form_widget(contactForm.message,{'attr':{'class':'form_control' }})}}
+                </div>
+
+
+
+                <div class="form_group">
+                    <button class ="btn btn-info mt-5 text-white col-lg-6 offset-lg-3 ">Submit</button>
+                </div>
+
+    {{ form_end(contactForm) }}
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </section>
+    <!-- Contact Section End -->
+
+{% endblock %}

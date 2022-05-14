@@ -1,0 +1,45 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Hello ClientController!{% endblock %}
+
+{% block body %}
+
+    <h1>Liste Commandes </h1>
+
+
+    <table class="table table-striped">
+        <a class="btn btn-success" href="{{ path('listo') }}">Create pdf</a>
+
+        <thead>
+        <tr>
+
+            <th>Id</th>
+            <th>etat</th>
+            <th>prix_total</th>
+            <th>client</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            <tr>
+                <td>{{ commande.id }}</td>
+                <td>{{ commande.etat }}</td>
+                <td>{{ commande.prixTotal }}</td>
+                <td>{{ commande.user }}</td>
+                <td>
+                    <a class="btn btn-warning" href="{{ path('updatecommande', {'id': commande.id}) }}">Update</a>
+                    <a class="btn btn-danger" href="{{ path('deletecommande', {'id': commande.id}) }}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+
+    <a class="btn btn-primary" href="{{ path('addcommande') }}">Create new</a>
+    {{ knp_pagination_render(commandes) }}
+
+
+{% endblock %}
